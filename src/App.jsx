@@ -1,7 +1,8 @@
-function App() {
+export default function App() {
   return (
-    <>시작!</>
+    <>
+      <h1>KIMPSOOM</h1>
+      <p>업비트 BTC: 30,588,000</p>
+    </>
   );
 }
-
-export default App;
