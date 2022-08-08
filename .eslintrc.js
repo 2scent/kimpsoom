@@ -18,6 +18,10 @@ module.exports = {
   plugins: [
     'react',
   ],
+  globals: {
+    context: 'readonly',
+    given: 'readonly',
+  },
   rules: {
     'linebreak-style': 'off',
     'react/react-in-jsx-scope': 'off',

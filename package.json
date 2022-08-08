@@ -88,7 +88,9 @@
     "eslint-plugin-import": "2.26.0",
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-react": "7.30.1",
-    "eslint-plugin-react-hooks": "4.6.0"
+    "eslint-plugin-react-hooks": "4.6.0",
+    "given2": "2.1.7",
+    "jest-plugin-context": "2.9.0"
   },
   "jest": {
     "roots": [
@@ -102,6 +104,8 @@
       "react-app-polyfill/jsdom"
     ],
     "setupFilesAfterEnv": [
+      "given2/setup",
+      "jest-plugin-context/setup",
       "<rootDir>/src/setupTests.js"
     ],
     "testMatch": [
