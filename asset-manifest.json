@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/kimpsoom/static/js/main.6e7c8e1f.js",
+    "index.html": "/kimpsoom/index.html",
+    "main.6e7c8e1f.js.map": "/kimpsoom/static/js/main.6e7c8e1f.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.6e7c8e1f.js"
+  ]
+}
