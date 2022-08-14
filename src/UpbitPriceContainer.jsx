@@ -1,20 +1,19 @@
-import useUpbit from './hooks/useUpbit';
 import useConnectUpbit from './hooks/useConnectUpbit';
+import Price from './Price';
 
-export default function UpbitPriceContainer() {
-  useConnectUpbit();
-
-  const { isLoading, data } = useUpbit();
-
-  if (isLoading) {
-    return <p>로딩 중</p>;
-  }
+export default function UpbitPriceContainer({ coins }) {
+  useConnectUpbit(coins.map((coin) => coin.market));
 
   return (
-    <p>
-      업비트 BTC:
-      {' '}
-      {data.toLocaleString()}
-    </p>
+    <ul>
+      {
+        coins.map((coin) => (
+          <Price
+            key={coin.market}
+            coin={coin}
+          />
+        ))
+      }
+    </ul>
   );
 }

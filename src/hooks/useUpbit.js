@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 
-export default function useUpbit() {
-  return useQuery(['upbit']);
+export default function useUpbit(coin) {
+  return useQuery(['upbit', coin]);
 }
