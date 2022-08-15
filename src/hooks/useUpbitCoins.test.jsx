@@ -23,13 +23,11 @@ describe('useUpbitCoins', () => {
     fetchUpbitCoins.mockResolvedValue(UPBIT_COINS);
   });
 
-  it('returns upbit coins', async () => {
+  it('returns upbit coins', () => {
     const { result } = renderHook(() => useUpbitCoins(), {
       wrapper: createWrapper(),
     });
 
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-
-    expect(result.current.data).toEqual(UPBIT_COINS);
+    waitFor(() => expect(result.current.data).toEqual(UPBIT_COINS));
   });
 });
