@@ -9,6 +9,11 @@ const upbitCoins = [
     korean_name: '이더리움',
     english_name: 'Ethereum',
   },
+  {
+    market: 'BTC-ETH',
+    korean_name: '비트코인',
+    english_name: 'Bitcoin',
+  },
 ];
 
 export default upbitCoins;

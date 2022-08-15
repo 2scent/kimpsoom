@@ -23,13 +23,15 @@ describe('useUpbitCoins', () => {
     fetchUpbitCoins.mockResolvedValue(UPBIT_COINS);
   });
 
-  it('returns upbit coins', async () => {
+  it('returns upbit krw market coins', async () => {
     const { result } = renderHook(() => useUpbitCoins(), {
       wrapper: createWrapper(),
     });
 
-    await waitFor(() => expect(result.current.isSuccess).toBe(true));
-
-    expect(result.current.data).toEqual(UPBIT_COINS);
+    await waitFor((
+      () => expect(result.current.data).toEqual((
+        UPBIT_COINS.filter((coin) => coin.market.startsWith('KRW'))
+      ))
+    ));
   });
 });

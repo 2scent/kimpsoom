@@ -2,19 +2,19 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import useUpbit from './hooks/useUpbit';
+import UPBIT_COINS from '../fixtures/upbit-coins';
+
+import useUpbitCoins from './hooks/useUpbitCoins';
 
 import App from './App';
 
-jest.mock('./hooks/useUpbit');
+jest.mock('./hooks/useUpbitCoins');
 jest.mock('./hooks/useConnectUpbit');
 
 describe('App', () => {
-  const upbitPrice = 31737000;
-
   beforeEach(() => {
-    useUpbit.mockReturnValue({
-      data: upbitPrice,
+    useUpbitCoins.mockReturnValue({
+      data: UPBIT_COINS,
     });
   });
 
@@ -35,6 +35,6 @@ describe('App', () => {
   it('renders upbit bitcoin price', () => {
     const { container } = renderApp();
 
-    expect(container).toHaveTextContent(`업비트 BTC: ${upbitPrice.toLocaleString()}`);
+    expect(container).toHaveTextContent(UPBIT_COINS[0].market);
   });
 });
