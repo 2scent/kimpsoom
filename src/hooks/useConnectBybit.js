@@ -28,8 +28,6 @@ export default function useConnectBybit(coinCodes = ['BTCUSDT']) {
       // console.log(JSON.parse(event.data));
       const data = JSON.parse(event.data);
 
-      console.log(data);
-
       if (!data.data) return;
 
       const lastTrade = data.data[data.data.length - 1];
