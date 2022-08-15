@@ -10,7 +10,7 @@ export default function UpbitCoins() {
 
   return (
     <UpbitPriceContainer
-      coins={coins.filter((coin) => coin.market.startsWith('KRW'))}
+      coins={coins}
     />
   );
   // return (
