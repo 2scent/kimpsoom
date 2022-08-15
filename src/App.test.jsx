@@ -3,18 +3,26 @@ import { render } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import UPBIT_COINS from '../fixtures/upbit-coins';
+import BYBIT_COINS from '../fixtures/bybit-coins';
 
 import useUpbitCoins from './hooks/useUpbitCoins';
+import useBybitCoins from './hooks/useBybitCoins';
 
 import App from './App';
 
 jest.mock('./hooks/useUpbitCoins');
 jest.mock('./hooks/useConnectUpbit');
+jest.mock('./hooks/useBybitCoins');
+jest.mock('./hooks/useConnectBybit');
 
 describe('App', () => {
   beforeEach(() => {
     useUpbitCoins.mockReturnValue({
       data: UPBIT_COINS,
+    });
+
+    useBybitCoins.mockReturnValue({
+      data: BYBIT_COINS,
     });
   });
 
@@ -32,9 +40,15 @@ describe('App', () => {
     expect(container).toHaveTextContent('KIMPSOOM');
   });
 
-  it('renders upbit bitcoin price', () => {
+  it('renders upbit container', () => {
     const { container } = renderApp();
 
-    expect(container).toHaveTextContent(UPBIT_COINS[0].market);
+    expect(container).toHaveTextContent('업비트');
+  });
+
+  it('renders bybit container', () => {
+    const { container } = renderApp();
+
+    expect(container).toHaveTextContent('바이비트');
   });
 });

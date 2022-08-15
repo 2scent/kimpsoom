@@ -1,16 +1,6 @@
 import useBybitCoins from './hooks/useBybitCoins';
 
-function BybitCoins({ coins }) {
-  return (
-    <ul>
-      {coins.map((coin) => (
-        <li key={coin.name}>
-          {coin.name}
-        </li>
-      ))}
-    </ul>
-  );
-}
+import BybitCoins from './BybitCoins';
 
 export default function BybitContainer() {
   const { isLoading, data: coins } = useBybitCoins();

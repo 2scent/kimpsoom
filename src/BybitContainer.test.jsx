@@ -8,6 +8,7 @@ import useBybitCoins from './hooks/useBybitCoins';
 
 import BybitContainer from './BybitContainer';
 
+jest.mock('./hooks/useConnectBybit');
 jest.mock('./hooks/useBybitCoins');
 
 describe('BybitContainer', () => {
