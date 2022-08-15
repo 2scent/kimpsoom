@@ -4,11 +4,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import UPBIT_COINS from '../fixtures/upbit-coins';
 
-import useUpbit from './hooks/useUpbit';
+import useUpbitPrice from './hooks/useUpbitPrice';
 
 import UpbitCoin from './UpbitCoin';
 
-jest.mock('./hooks/useUpbit');
+jest.mock('./hooks/useUpbitPrice');
 
 describe('UpbitCoin', () => {
   const coin = UPBIT_COINS[0];
@@ -25,7 +25,7 @@ describe('UpbitCoin', () => {
   ));
 
   beforeEach(() => {
-    useUpbit.mockImplementation(() => ({
+    useUpbitPrice.mockImplementation(() => ({
       isLoading: given.isLoading,
       data: price,
     }));

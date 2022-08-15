@@ -1,9 +1,9 @@
 import React from 'react';
 
-import useUpbit from './hooks/useUpbit';
+import useUpbitPrice from './hooks/useUpbitPrice';
 
 function UpbitCoin({ coin }) {
-  const { isLoading, data: price } = useUpbit({ code: coin.market });
+  const { isLoading, data: price } = useUpbitPrice({ code: coin.market });
 
   return (
     <li>
