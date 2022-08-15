@@ -19,7 +19,7 @@ export default function useConnectBybit({ codes = [] }) {
     onMessage: async (event) => {
       const { data } = JSON.parse(event.data);
 
-      if (!data) return;
+      if (!data?.length) return;
 
       const lastTrade = data[data.length - 1];
 

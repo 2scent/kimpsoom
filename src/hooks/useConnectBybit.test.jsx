@@ -54,7 +54,7 @@ describe('useConnectBybit', () => {
     ));
   });
 
-  context('when received data', () => {
+  context('when received valid data', () => {
     const symbol = 'BTCUSDT';
     const price = '24138.50';
 
@@ -79,6 +79,24 @@ describe('useConnectBybit', () => {
           ['bybit', symbol],
           price,
         )
+      ));
+    });
+  });
+
+  context('when received empty data', () => {
+    const message = {
+      data: [],
+    };
+
+    it('does nothing', async () => {
+      renderUseConnectBybit({});
+
+      await server.connected;
+
+      server.send(JSON.stringify(message));
+
+      await waitFor((
+        () => expect(setQueryData).not.toBeCalled()
       ));
     });
   });
