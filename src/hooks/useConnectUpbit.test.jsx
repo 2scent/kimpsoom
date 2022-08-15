@@ -11,6 +11,10 @@ jest.mock('@tanstack/react-query');
 describe('useConnectUpbit', () => {
   const setQueryData = jest.fn();
 
+  const renderUseConnectUpbit = ({ codes }) => renderHook((
+    () => useConnectUpbit({ codes })
+  ));
+
   let server;
 
   beforeEach(() => {
@@ -28,31 +32,44 @@ describe('useConnectUpbit', () => {
   });
 
   it('connects upbit with WebSocket', async () => {
-    renderHook(() => useConnectUpbit());
+    renderUseConnectUpbit({});
 
     expect(await server.connected).toBeTruthy();
   });
 
   it('sends request message', async () => {
-    renderHook(() => useConnectUpbit());
+    const codes = ['KRW-BTC', 'KRW-ETH'];
+    const message = [{ ticket: 'kimpsoom' }, { type: 'ticker', codes }];
+
+    renderUseConnectUpbit({ codes });
 
     await server.connected;
 
-    expect(server).toReceiveMessage('[{"ticket":"test"},{"type":"ticker","codes":["KRW-BTC"]}]');
+    expect(server).toReceiveMessage(JSON.stringify(message));
   });
 
   context('when received data', () => {
+    const message = {
+      code: 'KRW-BTC',
+      trade_price: 31639000.0000,
+    };
+
     it('calls setQueryData', async () => {
-      renderHook(() => useConnectUpbit());
+      renderUseConnectUpbit({});
 
       await server.connected;
 
       const data = new Blob();
-      data.text = async () => '{"trade_price":31639000.0000}';
+      data.text = async () => JSON.stringify(message);
 
       server.send(data);
 
-      waitFor(() => expect(setQueryData).toBeCalledWith(['upbit'], 31639000.0000));
+      await waitFor((
+        () => expect(setQueryData).toBeCalledWith(
+          ['upbit', message.code],
+          message.trade_price,
+        )
+      ));
     });
   });
 });
