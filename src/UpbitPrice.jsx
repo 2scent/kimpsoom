@@ -2,7 +2,7 @@ import React from 'react';
 
 import useUpbit from './hooks/useUpbit';
 
-function Price({ coin }) {
+function UpbitPrice({ coin }) {
   const { isLoading, data } = useUpbit(coin.market);
 
   if (isLoading) {
@@ -20,4 +20,4 @@ function Price({ coin }) {
   );
 }
 
-export default React.memo(Price);
+export default React.memo(UpbitPrice);
