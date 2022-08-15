@@ -3,7 +3,11 @@ import axios from 'axios';
 import BYBIT_COINS from '../../fixtures/bybit-coins';
 import UPBIT_COINS from '../../fixtures/upbit-coins';
 
-import { fetchBybitCoins, fetchUpbitCoins } from './api';
+import {
+  fetchBybitCoins,
+  fetchExchangeRate,
+  fetchUpbitCoins,
+} from './api';
 
 jest.mock('axios');
 
@@ -33,6 +37,20 @@ describe('api', () => {
       const upbitCoins = await fetchBybitCoins();
 
       expect(upbitCoins).toEqual(BYBIT_COINS);
+    });
+  });
+
+  describe('fetchExchangeRate', () => {
+    const basePrice = 1312.00;
+
+    beforeEach(() => {
+      axios.get.mockResolvedValue({ data: [{ basePrice }] });
+    });
+
+    it('returns exchange rate', async () => {
+      const exchangeRate = await fetchExchangeRate();
+
+      expect(exchangeRate).toBe(basePrice);
     });
   });
 });
