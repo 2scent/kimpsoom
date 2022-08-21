@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import BYBIT_COINS from '../../../../fixtures/bybit-coins';
+import BYBIT_COINS from '@fixtures/bybit-coins';
 
 import fetchBybitCoins from './fetchBybitCoins';
 

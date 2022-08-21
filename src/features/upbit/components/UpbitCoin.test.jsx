@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import UPBIT_COINS from '../../../../fixtures/upbit-coins';
+import UPBIT_COINS from '@fixtures/upbit-coins';
 
 import useUpbitPrice from '../hooks/useUpbitPrice';
 

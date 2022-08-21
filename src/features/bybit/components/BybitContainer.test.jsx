@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import BYBIT_COINS from '../../../../fixtures/bybit-coins';
+import BYBIT_COINS from '@fixtures/bybit-coins';
 
 import useBybitCoins from '../hooks/useBybitCoins';
 

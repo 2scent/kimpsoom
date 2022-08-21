@@ -15,6 +15,17 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  settings: {
+    'import/resolver': {
+      alias: {
+        extensions: ['.js', '.jsx'],
+        map: [
+          ['@', './src'],
+          ['@fixtures', './fixtures'],
+        ],
+      },
+    },
+  },
   plugins: [
     'react',
   ],
@@ -24,6 +35,17 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 'off',
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: [
+          '**/*.config.js',
+          '**/*.test.js',
+          '**/*.test.jsx',
+        ],
+      },
+    ],
+
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
   },

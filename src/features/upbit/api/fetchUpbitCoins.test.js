@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import UPBIT_COINS from '../../../../fixtures/upbit-coins';
+import UPBIT_COINS from '@fixtures/upbit-coins';
 
 import fetchUpbitCoins from './fetchUpbitCoins';
 
