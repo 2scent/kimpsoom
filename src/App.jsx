@@ -1,6 +1,6 @@
-import ExchangeRate from './ExchangeRate';
-import UpbitContainer from './UpbitContainer';
-import BybitContainer from './BybitContainer';
+import { ExchangeRate } from './features/exchange-rate';
+import { UpbitContainer } from './features/upbit';
+import { BybitContainer } from './features/bybit';
 
 export default function App() {
   return (
