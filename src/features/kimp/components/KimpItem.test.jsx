@@ -2,15 +2,16 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { useExchangeRate } from '@/features/exchange-rate';
+
 import useUpbitPrice from '../hooks/useUpbitPrice';
 import useBybitPrice from '../hooks/useBybitPrice';
-import useExchangeRate from '../hooks/useExchangeRate';
 
 import KimpItem from './KimpItem';
 import calculatePremium from '../utils/calculatePremium';
 
+jest.mock('@/features/exchange-rate');
 jest.mock('../hooks/useBybitPrice');
-jest.mock('../hooks/useExchangeRate');
 jest.mock('../hooks/useUpbitPrice');
 
 describe('KimpItem', () => {

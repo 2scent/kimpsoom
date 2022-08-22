@@ -3,8 +3,9 @@ import React, { useMemo } from 'react';
 import StyledTableRow from '@/components/StyledTableRow';
 import StyledTableCell from '@/components/StyledTableCell';
 
+import { useExchangeRate } from '@/features/exchange-rate';
+
 import useBybitPrice from '../hooks/useBybitPrice';
-import useExchangeRate from '../hooks/useExchangeRate';
 import useUpbitPrice from '../hooks/useUpbitPrice';
 
 import calculatePremium from '../utils/calculatePremium';
