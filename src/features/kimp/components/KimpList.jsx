@@ -22,7 +22,7 @@ function KimpList({ tickers }) {
         <TableHead>
           <StyledTableRow>
             <StyledTableCell>코인</StyledTableCell>
-            <StyledTableCell align="right">binance($)</StyledTableCell>
+            <StyledTableCell align="right">bybit($)</StyledTableCell>
             <StyledTableCell align="right">upbit(￦)</StyledTableCell>
             <StyledTableCell align="right">김치 프리미엄(%)</StyledTableCell>
           </StyledTableRow>
