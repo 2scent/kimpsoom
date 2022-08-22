@@ -19,21 +19,9 @@ describe('App', () => {
     expect(container).toHaveTextContent('KIMPSOOM');
   });
 
-  it('renders exchange rate', () => {
+  it('renders kimp', () => {
     const { container } = renderApp();
 
-    expect(container).toHaveTextContent('환율');
-  });
-
-  it('renders upbit container', () => {
-    const { container } = renderApp();
-
-    expect(container).toHaveTextContent('업비트');
-  });
-
-  it('renders bybit container', () => {
-    const { container } = renderApp();
-
-    expect(container).toHaveTextContent('바이비트');
+    expect(container).toHaveTextContent('김프');
   });
 });
