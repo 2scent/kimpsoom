@@ -48,7 +48,7 @@ describe('ExchangeRate', () => {
     it('renders exchange rate', () => {
       const { container } = renderExchangeRate();
 
-      expect(container).toHaveTextContent(exchangeRate);
+      expect(container).toHaveTextContent(exchangeRate.toFixed(2));
     });
   });
 });

@@ -19,7 +19,13 @@ describe('App', () => {
     expect(container).toHaveTextContent('KIMPSOOM');
   });
 
-  it('renders kimp', () => {
+  it('renders exchange rate', () => {
+    const { container } = renderApp();
+
+    expect(container).toHaveTextContent('환율');
+  });
+
+  it('renders kimchi premium', () => {
     const { container } = renderApp();
 
     expect(container).toHaveTextContent('김프');
