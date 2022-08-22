@@ -49,15 +49,27 @@ describe('KimpItem', () => {
     expect(container).toHaveTextContent(ticker);
   });
 
+  it('renders korea price', () => {
+    const { container } = renderKimpItem();
+
+    expect(container).toHaveTextContent(koreaPrice.toLocaleString());
+  });
+
+  it('renders foreign price', () => {
+    const { container } = renderKimpItem();
+
+    expect(container).toHaveTextContent(foreignPrice.toLocaleString());
+  });
+
   it('renders premium', () => {
     const { container } = renderKimpItem();
 
-    expect(container).toHaveTextContent(
-      calculatePremium({
-        koreaPrice,
-        foreignPrice,
-        exchangeRate,
-      }),
-    );
+    const premium = calculatePremium({
+      koreaPrice,
+      foreignPrice,
+      exchangeRate,
+    });
+
+    expect(container).toHaveTextContent(`${premium} %`);
   });
 });

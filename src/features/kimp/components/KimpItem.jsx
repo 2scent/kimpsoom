@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+
+import StyledTableRow from '@/components/StyledTableRow';
+import StyledTableCell from '@/components/StyledTableCell';
 
 import useBybitPrice from '../hooks/useBybitPrice';
 import useExchangeRate from '../hooks/useExchangeRate';
@@ -11,34 +14,24 @@ function KimpItem({ ticker }) {
   const { data: foreignPrice } = useBybitPrice({ ticker });
   const { data: exchangeRate } = useExchangeRate();
 
+  const premium = useMemo(
+    () => calculatePremium({ koreaPrice, foreignPrice, exchangeRate }),
+    [koreaPrice, foreignPrice, exchangeRate],
+  );
+
   return (
-    <li>
-      {ticker}
-      {' '}
-      :
-      {' '}
-      {koreaPrice}
-      {' '}
-      원
-      {' '}
-      :
-      {' '}
-      {foreignPrice}
-      {' '}
-      달러
-      {' '}
-      :
-      {' '}
-      {exchangeRate}
-      {' '}
-      :
-      {' '}
-      {calculatePremium({
-        koreaPrice,
-        foreignPrice,
-        exchangeRate,
-      })}
-    </li>
+    <StyledTableRow>
+      <StyledTableCell>{ticker}</StyledTableCell>
+      <StyledTableCell align="right">
+        {foreignPrice && foreignPrice.toLocaleString()}
+      </StyledTableCell>
+      <StyledTableCell align="right">
+        {koreaPrice && koreaPrice.toLocaleString()}
+      </StyledTableCell>
+      <StyledTableCell align="right">
+        {premium && `${premium} %`}
+      </StyledTableCell>
+    </StyledTableRow>
   );
 }
 
