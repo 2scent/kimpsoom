@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/kimpsoom/static/js/main.28c569ef.js",
+    "main.js": "/kimpsoom/static/js/main.1ac66d97.js",
     "index.html": "/kimpsoom/index.html",
-    "main.28c569ef.js.map": "/kimpsoom/static/js/main.28c569ef.js.map"
+    "main.1ac66d97.js.map": "/kimpsoom/static/js/main.1ac66d97.js.map"
   },
   "entrypoints": [
-    "static/js/main.28c569ef.js"
+    "static/js/main.1ac66d97.js"
   ]
 }
