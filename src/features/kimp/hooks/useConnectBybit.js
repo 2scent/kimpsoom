@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import useWebSocket from 'react-use-websocket';
 
-import { setCoin } from '@/store/coinSlice';
+import { setBybitPrice } from '@/store/coinSlice';
 
 export default function useConnectBybit({ tickers = [] }) {
   // const queryClient = useQueryClient();
@@ -35,10 +35,9 @@ export default function useConnectBybit({ tickers = [] }) {
       // );
 
       dispatch(
-        setCoin({
+        setBybitPrice({
           ticker: symbol.substring(0, symbol.length - 4),
-          name: 'bybit',
-          value: Number(price),
+          price: Number(price),
         }),
       );
     },

@@ -1,4 +1,4 @@
-import { setCoin } from '@/store/coinSlice';
+import { setUpbitPrice } from '@/store/coinSlice';
 // import { useQueryClient } from '@tanstack/react-query';
 
 import { useDispatch } from 'react-redux';
@@ -30,10 +30,9 @@ export default function useConnectUpbit({ tickers = [] }) {
       //   data.trade_price,
       // );
       dispatch(
-        setCoin({
+        setUpbitPrice({
           ticker: data.code.split('-')[1],
-          name: 'upbit',
-          value: data.trade_price,
+          price: data.trade_price,
         }),
       );
     },

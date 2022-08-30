@@ -51,7 +51,7 @@ const { reducer, actions } = createSlice({
       };
     },
 
-    setCoin(state, { payload: { ticker, name, value } }) {
+    setUpbitPrice(state, { payload: { ticker, price } }) {
       const { coins } = state;
 
       return {
@@ -59,7 +59,30 @@ const { reducer, actions } = createSlice({
         coins: coins.map(
           (coin) => (
             coin.ticker === ticker
-              ? { ...coin, [name]: value }
+              ? {
+                ...coin,
+                upbit: price,
+                kimp: price / coin.bybit,
+              }
+              : coin
+          ),
+        ),
+      };
+    },
+
+    setBybitPrice(state, { payload: { ticker, price } }) {
+      const { coins } = state;
+
+      return {
+        ...state,
+        coins: coins.map(
+          (coin) => (
+            coin.ticker === ticker
+              ? {
+                ...coin,
+                bybit: price,
+                kimp: coin.upbit / price,
+              }
               : coin
           ),
         ),
@@ -70,7 +93,8 @@ const { reducer, actions } = createSlice({
 
 export const {
   setCoins,
-  setCoin,
+  setUpbitPrice,
+  setBybitPrice,
   toggleSelectTicker,
 } = actions;
 

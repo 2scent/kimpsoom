@@ -1,11 +1,12 @@
+import { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectCoins, selectSelectedTickers, setCoins } from '@/store/coinSlice';
 
-import { useEffect } from 'react';
 import useUpbitTickers from '../hooks/useUpbitTickers';
 
-import KimpList from './KimpList';
+import KimpNewList from './KimpNewList';
 
 function KimpContainer() {
   const selectedTickers = useSelector(selectSelectedTickers);
@@ -28,7 +29,7 @@ function KimpContainer() {
       {isLoading
         ? <p>로딩 중</p>
         : (
-          <KimpList
+          <KimpNewList
             coins={coins}
           />
         )}
