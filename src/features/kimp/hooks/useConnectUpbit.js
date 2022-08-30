@@ -1,9 +1,14 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { setCoin } from '@/store/coinSlice';
+// import { useQueryClient } from '@tanstack/react-query';
+
+import { useDispatch } from 'react-redux';
 
 import useWebSocket from 'react-use-websocket';
 
 export default function useConnectUpbit({ tickers = [] }) {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
+
+  const dispatch = useDispatch();
 
   const { sendMessage } = useWebSocket('wss://api.upbit.com/websocket/v1', {
     onOpen: () => {
@@ -20,9 +25,16 @@ export default function useConnectUpbit({ tickers = [] }) {
     onMessage: async (event) => {
       const data = JSON.parse(await event.data.text());
 
-      queryClient.setQueryData(
-        ['upbit', data.code.split('-')[1], 'price'],
-        data.trade_price,
+      // queryClient.setQueryData(
+      //   ['upbit', data.code.split('-')[1], 'price'],
+      //   data.trade_price,
+      // );
+      dispatch(
+        setCoin({
+          ticker: data.code.split('-')[1],
+          name: 'upbit',
+          value: data.trade_price,
+        }),
       );
     },
   });

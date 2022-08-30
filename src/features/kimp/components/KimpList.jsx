@@ -12,7 +12,9 @@ import useConnectUpbit from '../hooks/useConnectUpbit';
 
 import KimpItem from './KimpItem';
 
-function KimpList({ tickers }) {
+function KimpList({ coins }) {
+  const tickers = coins.map((coin) => coin.ticker);
+
   useConnectUpbit({ tickers });
   useConnectBybit({ tickers });
 
@@ -28,10 +30,10 @@ function KimpList({ tickers }) {
           </StyledTableRow>
         </TableHead>
         <TableBody>
-          {tickers.map((ticker) => (
+          {coins.map((coin) => (
             <KimpItem
-              key={ticker}
-              ticker={ticker}
+              key={coin.ticker}
+              coin={coin}
             />
           ))}
         </TableBody>

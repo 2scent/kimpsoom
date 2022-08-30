@@ -16,6 +16,7 @@ const { reducer, actions } = createSlice({
   name: 'coin',
   initialState: {
     selectedTickers: initialSelectedTickers,
+    coins: [],
   },
   reducers: {
     toggleSelectTicker(state, { payload: ticker }) {
@@ -37,13 +38,44 @@ const { reducer, actions } = createSlice({
         ],
       };
     },
+
+    setCoins(state, { payload: tickers }) {
+      return {
+        ...state,
+        coins: tickers.map((ticker) => ({
+          ticker,
+          upbit: 0.0,
+          bybit: 0.0,
+          kimp: 0.0,
+        })),
+      };
+    },
+
+    setCoin(state, { payload: { ticker, name, value } }) {
+      const { coins } = state;
+
+      return {
+        ...state,
+        coins: coins.map(
+          (coin) => (
+            coin.ticker === ticker
+              ? { ...coin, [name]: value }
+              : coin
+          ),
+        ),
+      };
+    },
   },
 });
 
 export const {
+  setCoins,
+  setCoin,
   toggleSelectTicker,
 } = actions;
 
 export const selectSelectedTickers = (state) => state.coin.selectedTickers;
+
+export const selectCoins = (state) => state.coin.coins;
 
 export default reducer;

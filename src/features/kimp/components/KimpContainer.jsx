@@ -1,7 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { selectSelectedTickers } from '@/store/coinSlice';
+import { selectCoins, selectSelectedTickers, setCoins } from '@/store/coinSlice';
 
+import { useEffect } from 'react';
 import useUpbitTickers from '../hooks/useUpbitTickers';
 
 import KimpList from './KimpList';
@@ -9,9 +10,17 @@ import KimpList from './KimpList';
 function KimpContainer() {
   const selectedTickers = useSelector(selectSelectedTickers);
 
-  const { isLoading, data: tickers } = useUpbitTickers({
+  const coins = useSelector(selectCoins);
+
+  const { isLoading } = useUpbitTickers({
     select: (data) => data.filter((ticker) => selectedTickers.includes(ticker)),
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setCoins(selectedTickers));
+  }, [selectedTickers]);
 
   return (
     <>
@@ -20,7 +29,7 @@ function KimpContainer() {
         ? <p>로딩 중</p>
         : (
           <KimpList
-            tickers={tickers}
+            coins={coins}
           />
         )}
     </>
