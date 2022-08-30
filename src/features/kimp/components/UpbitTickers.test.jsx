@@ -2,23 +2,22 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TICKERS from '@fixtures/tickers';
 
 import useUpbitTickers from '../hooks/useUpbitTickers';
 
-import KimpContainer from './KimpContainer';
+import UpbitTickers from './UpbitTickers';
 
-jest.mock('../hooks/useConnectBybit');
-jest.mock('../hooks/useConnectUpbit');
 jest.mock('../hooks/useUpbitTickers');
 
-describe('KimpContainer', () => {
-  const selectedTickers = ['BTC', 'ETH'];
+describe('UpbitTickers', () => {
+  const dispatch = jest.fn();
 
   beforeEach(() => {
-    useSelector.mockReturnValue(selectedTickers);
+    useDispatch.mockReturnValue(dispatch);
+    useSelector.mockReturnValue(TICKERS);
 
     useUpbitTickers.mockImplementation(() => ({
       isLoading: given.isLoading,
@@ -26,25 +25,29 @@ describe('KimpContainer', () => {
     }));
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   const queryClient = new QueryClient();
 
-  const renderKimpContainer = () => render((
+  const renderUpbitTickers = () => render((
     <QueryClientProvider client={queryClient}>
-      <KimpContainer />
+      <UpbitTickers />
     </QueryClientProvider>
   ));
 
   it('renders heading', () => {
-    const { container } = renderKimpContainer();
+    const { container } = renderUpbitTickers();
 
-    expect(container).toHaveTextContent('김프');
+    expect(container).toHaveTextContent('코인');
   });
 
   context('when loading', () => {
     given('isLoading', () => true);
 
     it('renders loading', () => {
-      const { container } = renderKimpContainer();
+      const { container } = renderUpbitTickers();
 
       expect(container).toHaveTextContent('로딩 중');
     });
@@ -53,10 +56,10 @@ describe('KimpContainer', () => {
   context('when loaded', () => {
     given('isLoading', () => false);
 
-    it('renders selected tickers', () => {
-      const { container } = renderKimpContainer();
+    it('renders tickers', () => {
+      const { container } = renderUpbitTickers();
 
-      selectedTickers.forEach(
+      TICKERS.forEach(
         (ticker) => expect(container).toHaveTextContent(ticker),
       );
     });
