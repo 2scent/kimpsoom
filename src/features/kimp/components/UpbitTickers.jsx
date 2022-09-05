@@ -24,7 +24,10 @@ function UpbitTickers() {
       {isLoading
         ? <p>로딩 중</p>
         : (
-          <Grid container spacing={1}>
+          <Grid
+            container
+            spacing={1}
+          >
             {tickers
               .map((ticker) => (
                 <Grid
@@ -32,9 +35,12 @@ function UpbitTickers() {
                   item
                   xs={1}
                 >
-                  <Button onClick={() => handleClickTicker(ticker)}>
+                  <Button
+                    fullWidth
+                    variant={selectedTickers.includes(ticker) ? 'contained' : 'outlined'}
+                    onClick={() => handleClickTicker(ticker)}
+                  >
                     {ticker}
-                    {selectedTickers.includes(ticker) && ' (V)'}
                   </Button>
                 </Grid>
               ))}

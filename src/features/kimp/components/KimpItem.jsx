@@ -10,6 +10,11 @@ import calculatePremium from '../utils/calculatePremium';
 function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }) {
   const { data: exchangeRate } = useExchangeRate();
 
+  const differnce = useMemo(
+    () => koreaPrice - (foreignPrice * exchangeRate),
+    [koreaPrice, foreignPrice, exchangeRate],
+  );
+
   const premium = useMemo(
     () => calculatePremium({ koreaPrice, foreignPrice, exchangeRate }),
     [koreaPrice, foreignPrice, exchangeRate],
@@ -25,7 +30,8 @@ function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }) {
         {koreaPrice && koreaPrice.toLocaleString()}
       </StyledTableCell>
       <StyledTableCell align="right">
-        {premium && `${premium} %`}
+        {differnce && `${differnce.toLocaleString()}`}
+        {premium && ` (${premium}%)`}
       </StyledTableCell>
     </StyledTableRow>
   );
