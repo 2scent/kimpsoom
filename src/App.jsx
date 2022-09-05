@@ -5,7 +5,7 @@ import { KimpContainer, UpbitTickers } from '@/features/kimp';
 
 export default function App() {
   return (
-    <Container>
+    <Container sx={{ mb: 10 }}>
       <h1>KIMPSOOM</h1>
       <ExchangeRate />
       <UpbitTickers />
