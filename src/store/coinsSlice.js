@@ -11,8 +11,8 @@ const { reducer, actions } = createSlice({
         ...state,
         coins: tickers.map((ticker) => ({
           ticker,
-          koreaPrice: 0.0,
-          foreignPrice: 0.0,
+          koreaPrice: null,
+          foreignPrice: null,
           selected: false,
         })),
       };

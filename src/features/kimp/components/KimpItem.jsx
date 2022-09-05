@@ -10,13 +10,19 @@ import calculatePremium from '../utils/calculatePremium';
 function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }) {
   const { data: exchangeRate } = useExchangeRate();
 
-  const differnce = useMemo(
-    () => koreaPrice - (foreignPrice * exchangeRate),
+  const priceDiffernce = useMemo(
+    () => {
+      if (!koreaPrice || !foreignPrice || !exchangeRate) return null;
+      return koreaPrice - (foreignPrice * exchangeRate);
+    },
     [koreaPrice, foreignPrice, exchangeRate],
   );
 
-  const premium = useMemo(
-    () => calculatePremium({ koreaPrice, foreignPrice, exchangeRate }),
+  const kimchiPremium = useMemo(
+    () => {
+      if (!koreaPrice || !foreignPrice || !exchangeRate) return null;
+      return calculatePremium({ koreaPrice, foreignPrice, exchangeRate });
+    },
     [koreaPrice, foreignPrice, exchangeRate],
   );
 
@@ -30,8 +36,8 @@ function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }) {
         {koreaPrice && koreaPrice.toLocaleString()}
       </StyledTableCell>
       <StyledTableCell align="right">
-        {differnce && `${differnce.toLocaleString()}`}
-        {premium && ` (${premium}%)`}
+        {priceDiffernce && `${priceDiffernce.toLocaleString()}`}
+        {kimchiPremium && ` (${kimchiPremium}%)`}
       </StyledTableCell>
     </StyledTableRow>
   );

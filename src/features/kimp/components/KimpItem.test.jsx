@@ -52,7 +52,15 @@ describe('KimpItem', () => {
     expect(container).toHaveTextContent(coin.foreignPrice.toLocaleString());
   });
 
-  it('renders premium', () => {
+  it('renders price difference', () => {
+    const { container } = renderKimpItem();
+
+    const difference = coin.koreaPrice - (coin.foreignPrice * exchangeRate);
+
+    expect(container).toHaveTextContent(difference.toLocaleString());
+  });
+
+  it('renders kimchi premium', () => {
     const { container } = renderKimpItem();
 
     const premium = calculatePremium({
@@ -61,6 +69,6 @@ describe('KimpItem', () => {
       exchangeRate,
     });
 
-    expect(container).toHaveTextContent(`${premium} %`);
+    expect(container).toHaveTextContent(`${premium}%`);
   });
 });
