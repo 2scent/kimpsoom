@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import TICKERS from '@fixtures/tickers';
 
 import useConnectBybit from '../hooks/useConnectBybit';
@@ -22,6 +24,13 @@ describe('KimpList', () => {
       />
     </QueryClientProvider>
   ));
+
+  const dispatch = jest.fn();
+
+  beforeEach(() => {
+    useDispatch.mockReturnValue(dispatch);
+    useSelector.mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
+  });
 
   it('renders tickers', () => {
     const { container } = renderKimpList();

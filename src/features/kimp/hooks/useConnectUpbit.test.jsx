@@ -2,14 +2,16 @@ import { renderHook, waitFor } from '@testing-library/react';
 
 import WS from 'jest-websocket-mock';
 
-import { useQueryClient } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
+
+import { changeKoreaPrice } from '@/store/coinsSlice';
 
 import useConnectUpbit from './useConnectUpbit';
 
 jest.mock('@tanstack/react-query');
 
 describe('useConnectUpbit', () => {
-  const setQueryData = jest.fn();
+  const dispatch = jest.fn();
 
   const renderUseConnectUpbit = ({ tickers }) => renderHook((
     () => useConnectUpbit({ tickers })
@@ -20,9 +22,7 @@ describe('useConnectUpbit', () => {
   beforeEach(() => {
     server = new WS('wss://api.upbit.com/websocket/v1');
 
-    useQueryClient.mockReturnValue({
-      setQueryData,
-    });
+    useDispatch.mockReturnValue(dispatch);
   });
 
   afterEach(() => {
@@ -71,9 +71,11 @@ describe('useConnectUpbit', () => {
       server.send(data);
 
       await waitFor((
-        () => expect(setQueryData).toBeCalledWith(
-          ['upbit', message.code.split('-')[1], 'price'],
-          message.trade_price,
+        () => expect(dispatch).toBeCalledWith(
+          changeKoreaPrice({
+            ticker: message.code.split('-')[1],
+            koreaPrice: message.trade_price,
+          }),
         )
       ));
     });

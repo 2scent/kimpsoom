@@ -4,20 +4,18 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { useExchangeRate } from '@/features/exchange-rate';
 
-import useUpbitPrice from '../hooks/useUpbitPrice';
-import useBybitPrice from '../hooks/useBybitPrice';
-
-import KimpItem from './KimpItem';
 import calculatePremium from '../utils/calculatePremium';
 
+import KimpItem from './KimpItem';
+
 jest.mock('@/features/exchange-rate');
-jest.mock('../hooks/useBybitPrice');
-jest.mock('../hooks/useUpbitPrice');
 
 describe('KimpItem', () => {
-  const ticker = 'BTC';
-  const koreaPrice = 2946000;
-  const foreignPrice = 21374.5;
+  const coin = {
+    ticker: 'BTC',
+    koreaPrice: 2946000,
+    foreignPrice: 21374.5,
+  };
   const exchangeRate = 1338.5;
 
   const queryClient = new QueryClient();
@@ -25,20 +23,12 @@ describe('KimpItem', () => {
   const renderKimpItem = () => render((
     <QueryClientProvider client={queryClient}>
       <KimpItem
-        ticker={ticker}
+        coin={coin}
       />
     </QueryClientProvider>
   ));
 
   beforeEach(() => {
-    useUpbitPrice.mockImplementation(() => ({
-      data: koreaPrice,
-    }));
-
-    useBybitPrice.mockImplementation(() => ({
-      data: foreignPrice,
-    }));
-
     useExchangeRate.mockImplementation(() => ({
       data: exchangeRate,
     }));
@@ -47,27 +37,27 @@ describe('KimpItem', () => {
   it('renders ticker', () => {
     const { container } = renderKimpItem();
 
-    expect(container).toHaveTextContent(ticker);
+    expect(container).toHaveTextContent(coin.ticker);
   });
 
   it('renders korea price', () => {
     const { container } = renderKimpItem();
 
-    expect(container).toHaveTextContent(koreaPrice.toLocaleString());
+    expect(container).toHaveTextContent(coin.koreaPrice.toLocaleString());
   });
 
   it('renders foreign price', () => {
     const { container } = renderKimpItem();
 
-    expect(container).toHaveTextContent(foreignPrice.toLocaleString());
+    expect(container).toHaveTextContent(coin.foreignPrice.toLocaleString());
   });
 
   it('renders premium', () => {
     const { container } = renderKimpItem();
 
     const premium = calculatePremium({
-      koreaPrice,
-      foreignPrice,
+      koreaPrice: coin.koreaPrice,
+      foreignPrice: coin.foreignPrice,
       exchangeRate,
     });
 

@@ -2,6 +2,8 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+import { useDispatch, useSelector } from 'react-redux';
+
 import TICKERS from '@fixtures/tickers';
 
 import useUpbitTickers from '../hooks/useUpbitTickers';
@@ -13,7 +15,12 @@ jest.mock('../hooks/useConnectUpbit');
 jest.mock('../hooks/useUpbitTickers');
 
 describe('KimpContainer', () => {
+  const dispatch = jest.fn();
+
   beforeEach(() => {
+    useDispatch.mockReturnValue(dispatch);
+    useSelector.mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
+
     useUpbitTickers.mockImplementation(() => ({
       isLoading: given.isLoading,
       data: TICKERS,

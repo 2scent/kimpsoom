@@ -2,14 +2,16 @@ import { renderHook, waitFor } from '@testing-library/react';
 
 import WS from 'jest-websocket-mock';
 
-import { useQueryClient } from '@tanstack/react-query';
+import { useDispatch } from 'react-redux';
+
+import { changeForeignPrice } from '@/store/coinsSlice';
 
 import useConnectBybit from './useConnectBybit';
 
 jest.mock('@tanstack/react-query');
 
 describe('useConnectBybit', () => {
-  const setQueryData = jest.fn();
+  const dispatch = jest.fn();
 
   const renderUseConnectBybit = ({ tickers }) => renderHook((
     () => useConnectBybit({ tickers })
@@ -20,9 +22,7 @@ describe('useConnectBybit', () => {
   beforeEach(() => {
     server = new WS('wss://stream.bybit.com/realtime_public');
 
-    useQueryClient.mockReturnValue({
-      setQueryData,
-    });
+    useDispatch.mockReturnValue(dispatch);
   });
 
   afterEach(() => {
@@ -75,9 +75,11 @@ describe('useConnectBybit', () => {
       server.send(JSON.stringify(message));
 
       await waitFor((
-        () => expect(setQueryData).toBeCalledWith(
-          ['bybit', symbol.substring(0, symbol.length - 4), 'price'],
-          Number(price),
+        () => expect(dispatch).toBeCalledWith(
+          changeForeignPrice({
+            ticker: symbol.substring(0, symbol.length - 4),
+            foreignPrice: price,
+          }),
         )
       ));
     });
@@ -96,7 +98,7 @@ describe('useConnectBybit', () => {
       server.send(JSON.stringify(message));
 
       await waitFor((
-        () => expect(setQueryData).not.toBeCalled()
+        () => expect(dispatch).not.toBeCalled()
       ));
     });
   });

@@ -80,4 +80,6 @@ export const {
   changeForeignPrice,
 } = actions;
 
+export const coinsSelector = (state) => state.coins.coins;
+
 export default reducer;

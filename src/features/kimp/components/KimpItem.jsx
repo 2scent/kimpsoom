@@ -5,14 +5,9 @@ import StyledTableCell from '@/components/StyledTableCell';
 
 import { useExchangeRate } from '@/features/exchange-rate';
 
-import useBybitPrice from '../hooks/useBybitPrice';
-import useUpbitPrice from '../hooks/useUpbitPrice';
-
 import calculatePremium from '../utils/calculatePremium';
 
-function KimpItem({ ticker }) {
-  const { data: koreaPrice } = useUpbitPrice({ ticker });
-  const { data: foreignPrice } = useBybitPrice({ ticker });
+function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }) {
   const { data: exchangeRate } = useExchangeRate();
 
   const premium = useMemo(
