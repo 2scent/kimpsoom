@@ -82,4 +82,11 @@ export const {
 
 export const coinsSelector = (state) => state.coins.coins;
 
+export const selectedCoinsSelector = (state) => state.coins.coins
+  .filter((coin) => coin.selected);
+
+export const selectedTickersSelector = (state) => state.coins.coins
+  .filter((coin) => coin.selected)
+  .map((coin) => coin.ticker);
+
 export default reducer;

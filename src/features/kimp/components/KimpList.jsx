@@ -8,7 +8,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import Paper from '@mui/material/Paper';
 
-import { coinsSelector, initCoins } from '@/store/coinsSlice';
+import { selectedCoinsSelector, initCoins, selectCoins } from '@/store/coinsSlice';
 
 import StyledTableRow from '@/components/StyledTableRow';
 import StyledTableCell from '@/components/StyledTableCell';
@@ -23,12 +23,25 @@ function KimpList({ tickers }) {
 
   useEffect(() => {
     dispatch(initCoins({ tickers }));
+    dispatch(selectCoins({
+      tickers: [
+        'BTC',
+        'ETH',
+        'BCH',
+        'DOT',
+        'LINK',
+        'ADA',
+        'XRP',
+        'XLM',
+        'TRX',
+      ],
+    }));
   }, []);
 
   useConnectUpbit({ tickers });
   useConnectBybit({ tickers });
 
-  const coins = useSelector(coinsSelector);
+  const coins = useSelector(selectedCoinsSelector);
 
   return (
     <TableContainer component={Paper} sx={{ width: 650 }}>

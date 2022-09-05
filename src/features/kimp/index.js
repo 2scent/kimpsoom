@@ -1,2 +1,2 @@
-// eslint-disable-next-line import/prefer-default-export
 export { default as KimpContainer } from './components/KimpContainer';
+export { default as UpbitTickers } from './components/UpbitTickers';
