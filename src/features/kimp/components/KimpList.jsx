@@ -2,61 +2,53 @@ import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import Paper from '@mui/material/Paper';
+import {
+  Table,
+  TableBody,
+  TableContainer,
+  Paper,
+} from '@mui/material';
 
-import { initCoins, selectCoins, selectedCoinsSelector } from '@/store/coinsSlice';
+import {
+  initCoins,
+  selectCoins,
+  selectedCoinsSelector,
+} from '@/store/coinsSlice';
 
-import StyledTableRow from '@/components/StyledTableRow';
-import StyledTableCell from '@/components/StyledTableCell';
-import StyledTableSortLabel from '@/components/StyledTableSortLabel';
+import stableSort from '@/utils/stableSort';
 
+import SortTableHead from '@/components/SortTableHead';
 import useConnectBybit from '../hooks/useConnectBybit';
 import useConnectUpbit from '../hooks/useConnectUpbit';
 
 import KimpItem from './KimpItem';
 
-function descendingComparator(a, b, orderBy) {
-  if (orderBy === 'foreignPrice') {
-    return a[orderBy] - b[orderBy];
-  }
+const defaultComparator = () => 0;
 
-  if (orderBy === 'koreaPrice') {
-    return a[orderBy] - b[orderBy];
-  }
+const descendingComparators = {
+  ticker: (a, b) => {
+    if (b.ticker < a.ticker) {
+      return -1;
+    }
+    if (b.ticker > a.ticker) {
+      return 1;
+    }
+    return 0;
+  },
 
-  if (orderBy === 'kimp') {
-    return (a.koreaPrice / a.foreignPrice) - (b.koreaPrice / b.foreignPrice);
-  }
+  foreignPrice: (a, b) => a.foreignPrice - b.foreignPrice,
 
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
+  koreaPrice: (a, b) => a.koreaPrice - b.koreaPrice,
+
+  kimp: (a, b) => (a.koreaPrice / a.foreignPrice) - (b.koreaPrice / b.foreignPrice),
+};
 
 function getComparator(order, orderBy) {
-  return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
+  const comparator = descendingComparators[orderBy] || defaultComparator;
 
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
+  return order === 'desc'
+    ? (a, b) => comparator(a, b)
+    : (a, b) => -comparator(a, b);
 }
 
 const headCells = [
@@ -82,56 +74,24 @@ const headCells = [
   },
 ];
 
-function EnhancedTableHead({
-  order,
-  orderBy,
-  onRequestSort,
-}) {
-  const createSortHandler = (property) => (event) => {
-    onRequestSort(event, property);
-  };
-
-  return (
-    <TableHead>
-      <StyledTableRow>
-        {headCells.map((headCell) => (
-          <StyledTableCell
-            key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
-            sortDirection={orderBy === headCell.id ? order : false}
-          >
-            <StyledTableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : 'asc'}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-            </StyledTableSortLabel>
-          </StyledTableCell>
-        ))}
-      </StyledTableRow>
-    </TableHead>
-  );
-}
+const defaultSelectTickers = [
+  'BTC',
+  'ETH',
+  'BCH',
+  'DOT',
+  'LINK',
+  'ADA',
+  'XRP',
+  'XLM',
+  'TRX',
+];
 
 function KimpList({ tickers }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(initCoins({ tickers }));
-    dispatch(selectCoins({
-      tickers: [
-        'BTC',
-        'ETH',
-        'BCH',
-        'DOT',
-        'LINK',
-        'ADA',
-        'XRP',
-        'XLM',
-        'TRX',
-      ],
-    }));
+    dispatch(selectCoins({ tickers: defaultSelectTickers }));
   }, []);
 
   useConnectUpbit({ tickers });
@@ -151,7 +111,8 @@ function KimpList({ tickers }) {
   return (
     <TableContainer component={Paper}>
       <Table size="small" aria-label="simple table">
-        <EnhancedTableHead
+        <SortTableHead
+          headCells={headCells}
           order={order}
           orderBy={orderBy}
           onRequestSort={handleRequestSort}
