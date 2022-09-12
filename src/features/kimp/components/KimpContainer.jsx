@@ -1,3 +1,7 @@
+import AsyncBoundaryWithQuery from '@/shared/components/AsyncBoundaryWithQuery';
+import ErrorAlert from '@/shared/components/ErrorAlert';
+import LoadingAlert from '@/shared/components/LoadingAlert';
+
 import useUpbitTickers from '../hooks/useUpbitTickers';
 
 import KimpList from './KimpList';
@@ -9,11 +13,16 @@ function KimpContainer() {
     <>
       <h1>김프</h1>
       {isLoading
-        ? <p>로딩 중</p>
+        ? <LoadingAlert />
         : (
-          <KimpList
-            tickers={tickers}
-          />
+          <AsyncBoundaryWithQuery
+            pendingFallback={<LoadingAlert />}
+            rejectedFallback={ErrorAlert}
+          >
+            <KimpList
+              tickers={tickers}
+            />
+          </AsyncBoundaryWithQuery>
         )}
     </>
   );

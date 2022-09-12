@@ -1,14 +1,25 @@
+import AsyncBoundaryWithQuery from '@/shared/components/AsyncBoundaryWithQuery';
+import ErrorAlert from '@/shared/components/ErrorAlert';
+import LoadingAlert from '@/shared/components/LoadingAlert';
+
 import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
-export default function ExchangeRate() {
-  const { isLoading, data: exchangeRate } = useExchangeRate();
+function ExchangeRateFetch() {
+  const { data: exchangeRate } = useExchangeRate();
 
+  return <p>{exchangeRate?.toFixed(2)}</p>;
+}
+
+export default function ExchangeRate() {
   return (
     <>
       <h1>환율</h1>
-      {isLoading
-        ? <p>로딩 중</p>
-        : <p>{exchangeRate?.toFixed(2)}</p>}
+      <AsyncBoundaryWithQuery
+        pendingFallback={<LoadingAlert />}
+        rejectedFallback={ErrorAlert}
+      >
+        <ExchangeRateFetch />
+      </AsyncBoundaryWithQuery>
     </>
   );
 }
