@@ -6,8 +6,10 @@ module.exports = {
   },
   extends: [
     'plugin:react/recommended',
+    'plugin:@typescript-eslint/recommended',
     'airbnb',
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -18,7 +20,7 @@ module.exports = {
   settings: {
     'import/resolver': {
       alias: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
         map: [
           ['@', './src'],
           ['@fixtures', './fixtures'],
@@ -28,6 +30,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    '@typescript-eslint',
   ],
   globals: {
     context: 'readonly',
@@ -42,7 +45,21 @@ module.exports = {
           '**/*.config.js',
           '**/*.test.js',
           '**/*.test.jsx',
+          '**/*.config.ts',
+          '**/*.test.ts',
+          '**/*.test.tsx',
         ],
+      },
+    ],
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+        json: 'never',
       },
     ],
 
