@@ -48,6 +48,10 @@
   },
   "devDependencies": {
     "@craco/craco": "7.0.0-alpha.7",
+    "@types/jest": "29.0.1",
+    "@types/node": "18.7.16",
+    "@types/react": "18.0.19",
+    "@types/react-dom": "18.0.6",
     "craco-alias": "3.0.1",
     "eslint": "8.21.0",
     "eslint-config-airbnb": "19.0.4",
@@ -59,6 +63,7 @@
     "gh-pages": "4.0.0",
     "given2": "2.1.7",
     "jest-plugin-context": "2.9.0",
-    "jest-websocket-mock": "2.4.0"
+    "jest-websocket-mock": "2.4.0",
+    "typescript": "4.8.3"
   }
 }
