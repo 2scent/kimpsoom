@@ -5,7 +5,7 @@ import { Button, Grid } from '@mui/material';
 import {
   selectedTickersSelector,
   toggleSelectCoin,
-} from '@/store/coinsSlice';
+} from '@/shared/store/coinsSlice';
 
 import useUpbitTickers from '../hooks/useUpbitTickers';
 

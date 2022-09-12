@@ -4,7 +4,7 @@ import WS from 'jest-websocket-mock';
 
 import { useDispatch } from 'react-redux';
 
-import { changeForeignPrice } from '@/store/coinsSlice';
+import { changeForeignPrice } from '@/shared/store/coinsSlice';
 
 import useConnectBybit from './useConnectBybit';
 

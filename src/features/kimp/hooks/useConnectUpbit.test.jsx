@@ -4,7 +4,7 @@ import WS from 'jest-websocket-mock';
 
 import { useDispatch } from 'react-redux';
 
-import { changeKoreaPrice } from '@/store/coinsSlice';
+import { changeKoreaPrice } from '@/shared/store/coinsSlice';
 
 import useConnectUpbit from './useConnectUpbit';
 

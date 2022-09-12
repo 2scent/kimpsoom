@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import useWebSocket from 'react-use-websocket';
 
-import { changeKoreaPrice } from '@/store/coinsSlice';
+import { changeKoreaPrice } from '@/shared/store/coinsSlice';
 
 export default function useConnectUpbit({ tickers = [] }) {
   const dispatch = useDispatch();

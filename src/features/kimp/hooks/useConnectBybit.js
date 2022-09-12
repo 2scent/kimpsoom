@@ -2,7 +2,7 @@ import { useDispatch } from 'react-redux';
 
 import useWebSocket from 'react-use-websocket';
 
-import { changeForeignPrice } from '@/store/coinsSlice';
+import { changeForeignPrice } from '@/shared/store/coinsSlice';
 
 export default function useConnectBybit({ tickers = [] }) {
   const dispatch = useDispatch();

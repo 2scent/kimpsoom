@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 
-import StyledTableRow from '@/components/StyledTableRow';
-import StyledTableCell from '@/components/StyledTableCell';
+import StyledTableRow from '@/shared/components/StyledTableRow';
+import StyledTableCell from '@/shared/components/StyledTableCell';
 
-import { useExchangeRate } from '@/features/exchange-rate';
+import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
 import calculatePremium from '../utils/calculatePremium';
 

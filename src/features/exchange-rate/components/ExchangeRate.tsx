@@ -1,4 +1,4 @@
-import useExchangeRate from '../hooks/useExchangeRate';
+import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
 export default function ExchangeRate() {
   const { isLoading, data: exchangeRate } = useExchangeRate();

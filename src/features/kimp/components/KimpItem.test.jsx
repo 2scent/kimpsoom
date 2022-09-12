@@ -2,13 +2,13 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { useExchangeRate } from '@/features/exchange-rate';
+import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
 import calculatePremium from '../utils/calculatePremium';
 
 import KimpItem from './KimpItem';
 
-jest.mock('@/features/exchange-rate');
+jest.mock('@/shared/hooks/useExchangeRate');
 
 describe('KimpItem', () => {
   const coin = {

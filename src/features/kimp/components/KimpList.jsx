@@ -13,11 +13,11 @@ import {
   initCoins,
   selectCoins,
   selectedCoinsSelector,
-} from '@/store/coinsSlice';
+} from '@/shared/store/coinsSlice';
 
-import stableSort from '@/utils/stableSort';
+import stableSort from '@/shared/utils/stableSort';
 
-import SortTableHead from '@/components/SortTableHead';
+import SortTableHead from '@/shared/components/SortTableHead';
 import useConnectBybit from '../hooks/useConnectBybit';
 import useConnectUpbit from '../hooks/useConnectUpbit';
 

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import TICKERS from '@fixtures/tickers';
 
-import { toggleSelectCoin } from '@/store/coinsSlice';
+import { toggleSelectCoin } from '@/shared/store/coinsSlice';
 
 import useUpbitTickers from '../hooks/useUpbitTickers';
 

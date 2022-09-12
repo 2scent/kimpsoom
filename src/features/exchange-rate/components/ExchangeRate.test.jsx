@@ -2,11 +2,11 @@ import { render } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import useExchangeRate from '../hooks/useExchangeRate';
+import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
 import ExchangeRate from './ExchangeRate';
 
-jest.mock('../hooks/useExchangeRate');
+jest.mock('@/shared/hooks/useExchangeRate');
 
 describe('ExchangeRate', () => {
   const exchangeRate = 1312.00;
