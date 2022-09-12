@@ -8,7 +8,7 @@ export default function ExchangeRate() {
       <h1>환율</h1>
       {isLoading
         ? <p>로딩 중</p>
-        : <p>{exchangeRate.toFixed(2)}</p>}
+        : <p>{exchangeRate?.toFixed(2)}</p>}
     </>
   );
 }

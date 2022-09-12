@@ -62,6 +62,12 @@ module.exports = {
         json: 'never',
       },
     ],
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    ],
 
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
