@@ -1,15 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+type Coin = {
+  ticker: string;
+  koreaPrice?: number;
+  foreignPrice?: number;
+  selected: boolean;
+};
+
+type Ticker = Coin['ticker'];
+
+type CoinSliceState = {
+  coins: Coin[];
+};
+
+type StoreState = {
+  coins: CoinSliceState;
+};
+
+const initialState: CoinSliceState = {
+  coins: [],
+};
+
 const { reducer, actions } = createSlice({
   name: 'coins',
-  initialState: {
-    coins: [],
-  },
+  initialState,
   reducers: {
     initCoins(state, { payload: { tickers } }) {
       return {
         ...state,
-        coins: tickers.map((ticker) => ({
+        coins: tickers.map((ticker: Ticker) => ({
           ticker,
           koreaPrice: null,
           foreignPrice: null,
@@ -80,12 +99,12 @@ export const {
   changeForeignPrice,
 } = actions;
 
-export const coinsSelector = (state) => state.coins.coins;
+export const coinsSelector = (state: StoreState) => state.coins.coins;
 
-export const selectedCoinsSelector = (state) => state.coins.coins
+export const selectedCoinsSelector = (state: StoreState) => state.coins.coins
   .filter((coin) => coin.selected);
 
-export const selectedTickersSelector = (state) => state.coins.coins
+export const selectedTickersSelector = (state: StoreState) => state.coins.coins
   .filter((coin) => coin.selected)
   .map((coin) => coin.ticker);
 
