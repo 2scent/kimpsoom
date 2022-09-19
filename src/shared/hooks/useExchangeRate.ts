@@ -9,6 +9,5 @@ const intervalMs = 1000 * 60 * 5;
 export default function useExchangeRate(): UseQueryResult<number, AxiosError> {
   return useQuery(['exchangeRate'], fetchExchangeRate, {
     refetchInterval: intervalMs,
-    suspense: true,
   });
 }
