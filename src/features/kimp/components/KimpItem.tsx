@@ -7,7 +7,15 @@ import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
 import calculatePremium from '../utils/calculatePremium';
 
-function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }) {
+type KimpItemProps = {
+  coin: {
+    ticker: string;
+    koreaPrice: number;
+    foreignPrice: number;
+  };
+}
+
+function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }: KimpItemProps) {
   const { data: exchangeRate } = useExchangeRate();
 
   const priceDiffernce = useMemo(

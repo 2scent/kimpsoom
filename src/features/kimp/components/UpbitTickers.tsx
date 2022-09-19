@@ -16,7 +16,7 @@ function UpbitTickers() {
 
   const selectedTickers = useSelector(selectedTickersSelector, shallowEqual);
 
-  const handleClickTicker = (ticker) => dispatch(toggleSelectCoin({ ticker }));
+  const handleClickTicker = (ticker: string) => dispatch(toggleSelectCoin({ ticker }));
 
   return (
     <>
@@ -29,7 +29,7 @@ function UpbitTickers() {
             spacing={1}
           >
             {tickers
-              .map((ticker) => (
+              ?.map((ticker) => (
                 <Grid
                   key={ticker}
                   item

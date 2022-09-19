@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,10 +23,16 @@ import useConnectUpbit from '../hooks/useConnectUpbit';
 
 import KimpItem from './KimpItem';
 
-const defaultComparator = () => 0;
+type Coin = {
+  ticker: string;
+  koreaPrice: number;
+  foreignPrice: number;
+};
 
 const descendingComparators = {
-  ticker: (a, b) => {
+  default: () => 0,
+
+  ticker: (a: Coin, b: Coin) => {
     if (b.ticker < a.ticker) {
       return -1;
     }
@@ -36,19 +42,23 @@ const descendingComparators = {
     return 0;
   },
 
-  foreignPrice: (a, b) => a.foreignPrice - b.foreignPrice,
+  foreignPrice: (a: Coin, b: Coin) => a.foreignPrice - b.foreignPrice,
 
-  koreaPrice: (a, b) => a.koreaPrice - b.koreaPrice,
+  koreaPrice: (a: Coin, b: Coin) => a.koreaPrice - b.koreaPrice,
 
-  kimp: (a, b) => (a.koreaPrice / a.foreignPrice) - (b.koreaPrice / b.foreignPrice),
+  kimp: (a: Coin, b: Coin) => (a.koreaPrice / a.foreignPrice) - (b.koreaPrice / b.foreignPrice),
 };
 
-function getComparator(order, orderBy) {
-  const comparator = descendingComparators[orderBy] || defaultComparator;
+type Order = 'asc' | 'desc';
+
+type OrderBy = 'default' | 'ticker' | 'foreignPrice' | 'koreaPrice' | 'kimp';
+
+function getComparator(order: Order, orderBy: OrderBy) {
+  const comparator = descendingComparators[orderBy];
 
   return order === 'desc'
-    ? (a, b) => comparator(a, b)
-    : (a, b) => -comparator(a, b);
+    ? (a: Coin, b: Coin) => comparator(a, b)
+    : (a: Coin, b: Coin) => -comparator(a, b);
 }
 
 const headCells = [
@@ -86,7 +96,11 @@ const defaultSelectTickers = [
   'TRX',
 ];
 
-function KimpList({ tickers }) {
+type KimpListProps = {
+  tickers: string[];
+};
+
+function KimpList({ tickers }: KimpListProps) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -99,10 +113,10 @@ function KimpList({ tickers }) {
 
   const coins = useSelector(selectedCoinsSelector);
 
-  const [order, setOrder] = useState('asc');
-  const [orderBy, setOrderBy] = useState('');
+  const [order, setOrder] = useState<Order>('asc');
+  const [orderBy, setOrderBy] = useState<OrderBy>('default');
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (_: any, property: OrderBy) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -119,7 +133,7 @@ function KimpList({ tickers }) {
         />
         <TableBody>
           {stableSort(coins, getComparator(order, orderBy))
-            .map((coin) => (
+            .map((coin: Coin) => (
               <KimpItem
                 key={coin.ticker}
                 coin={coin}

@@ -4,7 +4,7 @@ import useWebSocket from 'react-use-websocket';
 
 import { changeForeignPrice } from '@/shared/store/coinsSlice';
 
-export default function useConnectBybit({ tickers = [] }) {
+export default function useConnectBybit({ tickers = [] }: { tickers: string[] }) {
   const dispatch = useDispatch();
 
   const { sendMessage } = useWebSocket('wss://stream.bybit.com/realtime_public', {

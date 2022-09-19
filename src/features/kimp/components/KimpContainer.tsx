@@ -20,7 +20,7 @@ function KimpContainer() {
             rejectedFallback={ErrorAlert}
           >
             <KimpList
-              tickers={tickers}
+              tickers={tickers || []}
             />
           </AsyncBoundaryWithQuery>
         )}

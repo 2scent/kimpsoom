@@ -4,7 +4,7 @@ import useWebSocket from 'react-use-websocket';
 
 import { changeKoreaPrice } from '@/shared/store/coinsSlice';
 
-export default function useConnectUpbit({ tickers = [] }) {
+export default function useConnectUpbit({ tickers = [] }: { tickers: string[] }) {
   const dispatch = useDispatch();
 
   const { sendMessage } = useWebSocket('wss://api.upbit.com/websocket/v1', {
