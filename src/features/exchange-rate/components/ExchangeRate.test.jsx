@@ -13,7 +13,6 @@ describe('ExchangeRate', () => {
 
   beforeEach(() => {
     useExchangeRate.mockImplementation(() => ({
-      isLoading: given.isLoading,
       data: exchangeRate,
     }));
   });
@@ -32,23 +31,9 @@ describe('ExchangeRate', () => {
     expect(container).toHaveTextContent('환율');
   });
 
-  context('when loading', () => {
-    given('isLoading', () => true);
+  it('renders exchange rate', () => {
+    const { container } = renderExchangeRate();
 
-    it('renders loading', () => {
-      const { container } = renderExchangeRate();
-
-      expect(container).toHaveTextContent('로딩 중');
-    });
-  });
-
-  context('when loaded', () => {
-    given('isLoading', () => false);
-
-    it('renders exchange rate', () => {
-      const { container } = renderExchangeRate();
-
-      expect(container).toHaveTextContent(exchangeRate.toFixed(2));
-    });
+    expect(container).toHaveTextContent(exchangeRate.toFixed(2));
   });
 });
