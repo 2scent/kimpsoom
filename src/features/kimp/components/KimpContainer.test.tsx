@@ -18,10 +18,10 @@ describe('KimpContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    useDispatch.mockReturnValue(dispatch);
-    useSelector.mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
+    (useDispatch as jest.Mock).mockReturnValue(dispatch);
+    (useSelector as jest.Mock).mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
 
-    useUpbitTickers.mockImplementation(() => ({
+    (useUpbitTickers as jest.Mock).mockImplementation(() => ({
       isLoading: given.isLoading,
       data: TICKERS,
     }));

@@ -48,6 +48,7 @@ module.exports = {
           '**/*.config.ts',
           '**/*.test.ts',
           '**/*.test.tsx',
+          '**/*.d.ts',
         ],
       },
     ],

@@ -18,10 +18,10 @@ describe('UpbitTickers', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    useDispatch.mockReturnValue(dispatch);
-    useSelector.mockReturnValue([]);
+    (useDispatch as jest.Mock).mockReturnValue(dispatch);
+    (useSelector as jest.Mock).mockReturnValue([]);
 
-    useUpbitTickers.mockImplementation(() => ({
+    (useUpbitTickers as jest.Mock).mockImplementation(() => ({
       isLoading: given.isLoading,
       data: TICKERS,
     }));

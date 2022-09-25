@@ -28,8 +28,8 @@ describe('KimpList', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
-    useDispatch.mockReturnValue(dispatch);
-    useSelector.mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
+    (useDispatch as jest.Mock).mockReturnValue(dispatch);
+    (useSelector as jest.Mock).mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
   });
 
   it('renders tickers', () => {

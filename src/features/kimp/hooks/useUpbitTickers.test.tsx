@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { renderHook, waitFor } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -13,14 +15,14 @@ jest.mock('../api/fetchUpbitTickers');
 const createWrapper = () => {
   const queryClient = new QueryClient();
 
-  return function Wrapper({ children }) {
+  return function Wrapper({ children }: { children: ReactNode }) {
     return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
   };
 };
 
 describe('useUpbitCoins', () => {
   beforeEach(() => {
-    fetchUpbitTickers.mockResolvedValue(TICKERS);
+    (fetchUpbitTickers as jest.Mock).mockResolvedValue(TICKERS);
   });
 
   it('returns upbit krw market tickers', async () => {

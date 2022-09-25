@@ -3,9 +3,9 @@ export default function calculatePremium({
   foreignPrice,
   exchangeRate,
 }: {
-  koreaPrice: number;
-  foreignPrice: number;
-  exchangeRate: number;
+  koreaPrice?: number;
+  foreignPrice?: number;
+  exchangeRate?: number;
 }): string {
   if (!koreaPrice || !foreignPrice || !exchangeRate) return '';
 

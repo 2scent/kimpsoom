@@ -29,7 +29,7 @@ describe('KimpItem', () => {
   ));
 
   beforeEach(() => {
-    useExchangeRate.mockImplementation(() => ({
+    (useExchangeRate as jest.Mock).mockImplementation(() => ({
       data: exchangeRate,
     }));
   });
