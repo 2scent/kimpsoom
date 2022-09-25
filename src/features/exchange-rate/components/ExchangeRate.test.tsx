@@ -12,7 +12,7 @@ describe('ExchangeRate', () => {
   const exchangeRate = 1312.00;
 
   beforeEach(() => {
-    useExchangeRate.mockImplementation(() => ({
+    (useExchangeRate as jest.Mock).mockImplementation(() => ({
       data: exchangeRate,
     }));
   });
