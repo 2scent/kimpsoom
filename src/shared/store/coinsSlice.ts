@@ -4,14 +4,14 @@ type Coin = {
   ticker: string;
   koreaPrice?: number;
   foreignPrice?: number;
-  selected: boolean;
+  selected?: boolean;
 };
 
 type Ticker = Coin['ticker'];
 
-type CoinSliceState = {
+export interface CoinSliceState {
   coins: Coin[];
-};
+}
 
 type StoreState = {
   coins: CoinSliceState;

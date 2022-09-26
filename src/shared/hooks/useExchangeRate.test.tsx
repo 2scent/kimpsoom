@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { renderHook, waitFor } from '@testing-library/react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -11,7 +13,7 @@ jest.mock('../api/fetchExchangeRate');
 const createWrapper = () => {
   const queryClient = new QueryClient();
 
-  return function Wrapper({ children }) {
+  return function Wrapper({ children }: { children: ReactNode }) {
     return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
   };
 };
@@ -20,7 +22,7 @@ describe('useExchangeRate', () => {
   const exchangeRate = 1312.00;
 
   beforeEach(() => {
-    fetchExchangeRate.mockResolvedValue(exchangeRate);
+    (fetchExchangeRate as jest.Mock).mockResolvedValue(exchangeRate);
   });
 
   it('returns exchange rate', async () => {

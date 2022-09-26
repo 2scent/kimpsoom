@@ -4,13 +4,24 @@ import StyledTableRow from './StyledTableRow';
 import StyledTableCell from './StyledTableCell';
 import StyledTableSortLabel from './StyledTableSortLabel';
 
-function SortTableHead({
+type SortTableHeadPros<OrderBy> = {
+  headCells: {
+    id: OrderBy;
+    label: string;
+    numeric: boolean;
+  }[];
+  order: 'asc' | 'desc';
+  orderBy: OrderBy;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: OrderBy) => void;
+};
+
+function SortTableHead<OrderBy extends string>({
   headCells,
   order,
   orderBy,
   onRequestSort,
-}) {
-  const createSortHandler = (property) => (event) => {
+}: SortTableHeadPros<OrderBy>) {
+  const createSortHandler = (property: OrderBy) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
   };
 

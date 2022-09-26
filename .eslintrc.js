@@ -38,6 +38,8 @@ module.exports = {
   },
   rules: {
     'linebreak-style': 'off',
+    'no-unused-vars': 'off',
+    'no-undef': 'off',
     'import/no-extraneous-dependencies': [
       'error',
       {

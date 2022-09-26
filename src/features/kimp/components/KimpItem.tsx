@@ -10,8 +10,8 @@ import calculatePremium from '../utils/calculatePremium';
 type KimpItemProps = {
   coin: {
     ticker: string;
-    koreaPrice: number;
-    foreignPrice: number;
+    koreaPrice?: number;
+    foreignPrice?: number;
   };
 }
 

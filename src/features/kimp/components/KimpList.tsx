@@ -25,8 +25,8 @@ import KimpItem from './KimpItem';
 
 type Coin = {
   ticker: string;
-  koreaPrice: number;
-  foreignPrice: number;
+  koreaPrice?: number;
+  foreignPrice?: number;
 };
 
 const descendingComparators = {
@@ -42,11 +42,11 @@ const descendingComparators = {
     return 0;
   },
 
-  foreignPrice: (a: Coin, b: Coin) => a.foreignPrice - b.foreignPrice,
+  foreignPrice: (a: Coin, b: Coin) => (a.foreignPrice ?? 0) - (b.foreignPrice ?? 0),
 
-  koreaPrice: (a: Coin, b: Coin) => a.koreaPrice - b.koreaPrice,
+  koreaPrice: (a: Coin, b: Coin) => (a.koreaPrice ?? 0) - (b.koreaPrice ?? 0),
 
-  kimp: (a: Coin, b: Coin) => (a.koreaPrice / a.foreignPrice) - (b.koreaPrice / b.foreignPrice),
+  kimp: (a: Coin, b: Coin) => ((a.koreaPrice ?? 0) / (a.foreignPrice ?? 0)) - ((b.koreaPrice ?? 0) / (b.foreignPrice ?? 0)),
 };
 
 type Order = 'asc' | 'desc';
@@ -61,7 +61,11 @@ function getComparator(order: Order, orderBy: OrderBy) {
     : (a: Coin, b: Coin) => -comparator(a, b);
 }
 
-const headCells = [
+const headCells: {
+  id: OrderBy;
+  label: string;
+  numeric: boolean;
+}[] = [
   {
     id: 'ticker',
     numeric: false,
@@ -116,7 +120,7 @@ function KimpList({ tickers }: KimpListProps) {
   const [order, setOrder] = useState<Order>('asc');
   const [orderBy, setOrderBy] = useState<OrderBy>('default');
 
-  const handleRequestSort = (_: any, property: OrderBy) => {
+  const handleRequestSort = (_: unknown, property: OrderBy) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -133,7 +137,7 @@ function KimpList({ tickers }: KimpListProps) {
         />
         <TableBody>
           {stableSort(coins, getComparator(order, orderBy))
-            .map((coin: Coin) => (
+            .map((coin) => (
               <KimpItem
                 key={coin.ticker}
                 coin={coin}

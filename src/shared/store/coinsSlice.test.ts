@@ -22,7 +22,9 @@ describe('coinsSlice', () => {
   });
 
   describe('initCoins', () => {
-    const initialState = {};
+    const initialState = {
+      coins: [],
+    };
 
     it('initializes coins', () => {
       const state = reducer(initialState, initCoins({ tickers: TICKERS }));
@@ -128,7 +130,7 @@ describe('coinsSlice', () => {
         changeKoreaPrice({ ticker, koreaPrice }),
       );
 
-      const btc = state.coins.find((coin) => coin.ticker === ticker);
+      const btc = state.coins.find((coin) => coin.ticker === ticker)!;
 
       expect(btc.koreaPrice).toBe(koreaPrice);
     });
@@ -153,7 +155,7 @@ describe('coinsSlice', () => {
         changeForeignPrice({ ticker, foreignPrice }),
       );
 
-      const eth = state.coins.find((coin) => coin.ticker === ticker);
+      const eth = state.coins.find((coin) => coin.ticker === ticker)!;
 
       expect(eth.foreignPrice).toBe(foreignPrice);
     });
