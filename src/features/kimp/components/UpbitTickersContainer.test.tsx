@@ -1,7 +1,5 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import TICKERS from '@fixtures/tickers';
@@ -30,14 +28,14 @@ describe('UpbitTickersContainer', () => {
     jest.clearAllMocks();
   });
 
-  const queryClient = new QueryClient();
+  const renderUpbitTickersContainer = () => render(<UpbitTickersContainer />);
 
-  const renderUpbitTickersContainer = () => render((
-    <QueryClientProvider client={queryClient}>
-      <UpbitTickersContainer />
-    </QueryClientProvider>
-  ));
-  
+  it('renders heading', () => {
+    const { container } = renderUpbitTickersContainer();
+
+    expect(container).toHaveTextContent('코인');
+  });
+
   it('renders tickers', () => {
     const { container } = renderUpbitTickersContainer();
 

@@ -1,14 +1,14 @@
 import { Container } from '@mui/material';
 
 import { ExchangeRateContainer } from '@/features/exchange-rate';
-import { KimpContainer, UpbitTickers } from '@/features/kimp';
+import { KimpContainer, UpbitTickersContainer } from '@/features/kimp';
 
 export default function App() {
   return (
     <Container sx={{ mb: 10 }}>
       <h1>KIMPSOOM</h1>
       <ExchangeRateContainer />
-      <UpbitTickers />
+      <UpbitTickersContainer />
       <KimpContainer />
     </Container>
   );

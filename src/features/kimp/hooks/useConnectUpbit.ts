@@ -2,9 +2,13 @@ import { useDispatch } from 'react-redux';
 
 import useWebSocket from 'react-use-websocket';
 
+import { Ticker } from '@/shared/models';
+
 import { changeKoreaPrice } from '@/shared/store/coinsSlice';
 
-export default function useConnectUpbit({ tickers = [] }: { tickers: string[] }) {
+export interface UseConnectUpbitParams { tickers: Ticker[] }
+
+export default function useConnectUpbit({ tickers = [] }: UseConnectUpbitParams) {
   const dispatch = useDispatch();
 
   const { sendMessage } = useWebSocket('wss://api.upbit.com/websocket/v1', {

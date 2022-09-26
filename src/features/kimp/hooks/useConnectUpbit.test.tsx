@@ -6,14 +6,14 @@ import { useDispatch } from 'react-redux';
 
 import { changeKoreaPrice } from '@/shared/store/coinsSlice';
 
-import useConnectUpbit from './useConnectUpbit';
+import useConnectUpbit, { UseConnectUpbitParams } from './useConnectUpbit';
 
 jest.mock('@tanstack/react-query');
 
 describe('useConnectUpbit', () => {
   const dispatch = jest.fn();
 
-  const renderUseConnectUpbit = ({ tickers }: { tickers: string[] }) => renderHook((
+  const renderUseConnectUpbit = ({ tickers }: UseConnectUpbitParams) => renderHook((
     () => useConnectUpbit({ tickers })
   ));
 

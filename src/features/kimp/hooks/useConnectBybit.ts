@@ -2,9 +2,13 @@ import { useDispatch } from 'react-redux';
 
 import useWebSocket from 'react-use-websocket';
 
+import { Ticker } from '@/shared/models';
+
 import { changeForeignPrice } from '@/shared/store/coinsSlice';
 
-export default function useConnectBybit({ tickers = [] }: { tickers: string[] }) {
+export interface UseConnectBybitParams { tickers: Ticker[] }
+
+export default function useConnectBybit({ tickers = [] }: UseConnectBybitParams) {
   const dispatch = useDispatch();
 
   const { sendMessage } = useWebSocket('wss://stream.bybit.com/realtime_public', {

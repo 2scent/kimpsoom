@@ -9,6 +9,8 @@ import {
   Paper,
 } from '@mui/material';
 
+import { Ticker } from '@/shared/models';
+
 import {
   initCoins,
   selectCoins,
@@ -18,6 +20,7 @@ import {
 import stableSort from '@/shared/utils/stableSort';
 
 import SortTableHead from '@/shared/components/SortTableHead';
+
 import useConnectBybit from '../hooks/useConnectBybit';
 import useConnectUpbit from '../hooks/useConnectUpbit';
 
@@ -101,7 +104,7 @@ const defaultSelectTickers = [
 ];
 
 type KimpListProps = {
-  tickers: string[];
+  tickers: Ticker[];
 };
 
 function KimpList({ tickers }: KimpListProps) {
