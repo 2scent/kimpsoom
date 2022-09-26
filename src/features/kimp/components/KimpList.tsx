@@ -49,7 +49,8 @@ const descendingComparators = {
 
   koreaPrice: (a: Coin, b: Coin) => (a.koreaPrice ?? 0) - (b.koreaPrice ?? 0),
 
-  kimp: (a: Coin, b: Coin) => ((a.koreaPrice ?? 0) / (a.foreignPrice ?? 0)) - ((b.koreaPrice ?? 0) / (b.foreignPrice ?? 0)),
+  kimp: (a: Coin, b: Coin) => ((a.koreaPrice ?? 0) / (a.foreignPrice ?? 0))
+    - ((b.koreaPrice ?? 0) / (b.foreignPrice ?? 0)),
 };
 
 type Order = 'asc' | 'desc';
