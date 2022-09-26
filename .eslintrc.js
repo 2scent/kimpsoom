@@ -65,6 +65,7 @@ module.exports = {
         json: 'never',
       },
     ],
+    'import/prefer-default-export': 'off',
     'react/jsx-filename-extension': [
       1,
       {
