@@ -49,6 +49,7 @@
   },
   "devDependencies": {
     "@craco/craco": "7.0.0-alpha.7",
+    "@testing-library/user-event": "14.4.3",
     "@types/jest": "27.0.0",
     "@types/node": "18.7.16",
     "@types/react": "18.0.19",
