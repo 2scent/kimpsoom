@@ -1,24 +1,14 @@
-import { ReactNode } from 'react';
-
 import { renderHook, waitFor } from '@testing-library/react';
 
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
 import TICKERS from '@fixtures/tickers';
+
+import { createWrapper } from '@/shared/utils/testing/react-query';
 
 import fetchUpbitTickers from '../api/fetchUpbitTickers';
 
 import useUpbitTickers from './useUpbitTickers';
 
 jest.mock('../api/fetchUpbitTickers');
-
-const createWrapper = () => {
-  const queryClient = new QueryClient();
-
-  return function Wrapper({ children }: { children: ReactNode }) {
-    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
-  };
-};
 
 describe('useUpbitCoins', () => {
   beforeEach(() => {

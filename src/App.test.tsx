@@ -1,17 +1,9 @@
-import { render } from '@testing-library/react';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderWithClient } from './shared/utils/testing/react-query';
 
 import App from './App';
 
 describe('App', () => {
-  const queryClient = new QueryClient();
-
-  const renderApp = () => render((
-    <QueryClientProvider client={queryClient}>
-      <App />
-    </QueryClientProvider>
-  ));
+  const renderApp = () => renderWithClient(<App />);
 
   it('renders heading', () => {
     const { container } = renderApp();

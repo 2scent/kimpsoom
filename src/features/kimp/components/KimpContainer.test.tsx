@@ -1,10 +1,8 @@
-import { render } from '@testing-library/react';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import TICKERS from '@fixtures/tickers';
+
+import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import useUpbitTickers from '../hooks/useUpbitTickers';
 
@@ -27,13 +25,7 @@ describe('KimpContainer', () => {
     }));
   });
 
-  const queryClient = new QueryClient();
-
-  const renderKimpContainer = () => render((
-    <QueryClientProvider client={queryClient}>
-      <KimpContainer />
-    </QueryClientProvider>
-  ));
+  const renderKimpContainer = () => renderWithClient(<KimpContainer />);
 
   it('renders heading', () => {
     const { container } = renderKimpContainer();

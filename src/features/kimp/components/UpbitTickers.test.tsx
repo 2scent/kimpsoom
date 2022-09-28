@@ -1,10 +1,10 @@
-import { fireEvent, render } from '@testing-library/react';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
 import TICKERS from '@fixtures/tickers';
+
+import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import { toggleSelectCoin } from '@/shared/store/coinsSlice';
 
@@ -30,14 +30,8 @@ describe('UpbitTickersContainer', () => {
     jest.clearAllMocks();
   });
 
-  const queryClient = new QueryClient();
+  const renderUpbitTickersContainer = () => renderWithClient(<UpbitTickersContainer />);
 
-  const renderUpbitTickersContainer = () => render((
-    <QueryClientProvider client={queryClient}>
-      <UpbitTickersContainer />
-    </QueryClientProvider>
-  ));
-  
   it('renders tickers', () => {
     const { container } = renderUpbitTickersContainer();
 

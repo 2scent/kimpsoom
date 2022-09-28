@@ -1,6 +1,4 @@
-import { render } from '@testing-library/react';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
@@ -17,13 +15,11 @@ describe('ExchangeRate', () => {
     }));
   });
 
-  const queryClient = new QueryClient();
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-  const renderExchangeRate = () => render((
-    <QueryClientProvider client={queryClient}>
-      <ExchangeRate />
-    </QueryClientProvider>
-  ));
+  const renderExchangeRate = () => renderWithClient(<ExchangeRate />);
 
   it('renders exchange rate', () => {
     const { container } = renderExchangeRate();

@@ -1,6 +1,4 @@
-import { render } from '@testing-library/react';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
@@ -18,14 +16,10 @@ describe('KimpItem', () => {
   };
   const exchangeRate = 1338.5;
 
-  const queryClient = new QueryClient();
-
-  const renderKimpItem = () => render((
-    <QueryClientProvider client={queryClient}>
-      <KimpItem
-        coin={coin}
-      />
-    </QueryClientProvider>
+  const renderKimpItem = () => renderWithClient((
+    <KimpItem
+      coin={coin}
+    />
   ));
 
   beforeEach(() => {

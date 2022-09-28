@@ -1,10 +1,8 @@
-import { render } from '@testing-library/react';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import TICKERS from '@fixtures/tickers';
+
+import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import useConnectBybit from '../hooks/useConnectBybit';
 import useConnectUpbit from '../hooks/useConnectUpbit';
@@ -15,14 +13,10 @@ jest.mock('../hooks/useConnectBybit');
 jest.mock('../hooks/useConnectUpbit');
 
 describe('KimpList', () => {
-  const queryClient = new QueryClient();
-
-  const renderKimpList = () => render((
-    <QueryClientProvider client={queryClient}>
-      <KimpList
-        tickers={TICKERS}
-      />
-    </QueryClientProvider>
+  const renderKimpList = () => renderWithClient((
+    <KimpList
+      tickers={TICKERS}
+    />
   ));
 
   const dispatch = jest.fn();

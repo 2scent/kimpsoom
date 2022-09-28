@@ -15,9 +15,7 @@ describe('ExchangeRateContainer', () => {
     }));
   });
 
-  const renderExchangeRateContainer = () => render((
-    <ExchangeRateContainer />
-  ));
+  const renderExchangeRateContainer = () => render(<ExchangeRateContainer />);
 
   it('renders heading', () => {
     const { container } = renderExchangeRateContainer();
