@@ -9,8 +9,6 @@ import {
   Paper,
 } from '@mui/material';
 
-import { Ticker } from '@/shared/models';
-
 import {
   initCoins,
   selectCoins,

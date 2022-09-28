@@ -2,8 +2,6 @@ import { useDispatch } from 'react-redux';
 
 import useWebSocket from 'react-use-websocket';
 
-import { Ticker } from '@/shared/models';
-
 import { changeForeignPrice } from '@/shared/store/coinsSlice';
 
 export interface UseConnectBybitParams { tickers: Ticker[] }

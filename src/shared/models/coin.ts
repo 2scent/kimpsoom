@@ -1,12 +1,6 @@
-export type Ticker = string;
-
-export type Price = number;
-
-export type Rate = number;
-
 export interface Coin {
-  ticker: Ticker;
-  koreaPrice: Price;
-  foreignPrice: Price;
-  exchangeRate: Rate;
+  readonly ticker: Ticker;
+  readonly koreaPrice: Price;
+  readonly foreignPrice: Price;
+  readonly exchangeRate: Rate;
 }
