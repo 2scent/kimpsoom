@@ -1,23 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-type Coin = {
-  ticker: string;
-  koreaPrice?: number;
-  foreignPrice?: number;
-  selected?: boolean;
-};
+import { Coin } from '../models';
 
-type Ticker = Coin['ticker'];
+import { RootState } from './index';
 
-export interface CoinSliceState {
-  coins: Coin[];
+type SelectableCoin = Pick<Coin, 'ticker'>
+  & Pick<Partial<Coin>, 'koreaPrice' | 'foreignPrice'>
+  & { readonly selected?: boolean };
+
+export interface CoinState {
+  readonly coins: SelectableCoin[];
 }
 
-type StoreState = {
-  coins: CoinSliceState;
-};
-
-const initialState: CoinSliceState = {
+const initialState: CoinState = {
   coins: [],
 };
 
@@ -99,12 +94,12 @@ export const {
   changeForeignPrice,
 } = actions;
 
-export const coinsSelector = (state: StoreState) => state.coins.coins;
+export const coinsSelector = (state: RootState) => state.coins.coins;
 
-export const selectedCoinsSelector = (state: StoreState) => state.coins.coins
+export const selectedCoinsSelector = (state: RootState) => state.coins.coins
   .filter((coin) => coin.selected);
 
-export const selectedTickersSelector = (state: StoreState) => state.coins.coins
+export const selectedTickersSelector = (state: RootState) => state.coins.coins
   .filter((coin) => coin.selected)
   .map((coin) => coin.ticker);
 
