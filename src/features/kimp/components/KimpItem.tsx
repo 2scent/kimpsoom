@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { Coin } from '@/shared/models';
-
 import StyledTableRow from '@/shared/components/StyledTableRow';
 import StyledTableCell from '@/shared/components/StyledTableCell';
 
@@ -10,8 +8,12 @@ import useExchangeRate from '@/shared/hooks/useExchangeRate';
 import calculatePremium from '../utils/calculatePremium';
 
 type KimpItemProps = {
-  coin: Pick<Coin, 'ticker'> & Pick<Partial<Coin>, 'koreaPrice' | 'foreignPrice'>;
-}
+  coin: {
+    readonly ticker: string;
+    readonly koreaPrice?: number;
+    readonly foreignPrice?: number;
+  };
+};
 
 function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }: KimpItemProps) {
   const { data: exchangeRate } = useExchangeRate();

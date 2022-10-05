@@ -4,7 +4,9 @@ import useWebSocket from 'react-use-websocket';
 
 import { changeKoreaPrice } from '@/shared/store/coinsSlice';
 
-export interface UseConnectUpbitParams { tickers: Ticker[] }
+export interface UseConnectUpbitParams {
+  tickers: string[];
+}
 
 export default function useConnectUpbit({ tickers = [] }: UseConnectUpbitParams) {
   const dispatch = useDispatch();

@@ -103,7 +103,7 @@ const defaultSelectTickers = [
 ];
 
 type KimpListProps = {
-  tickers: Ticker[];
+  tickers: string[];
 };
 
 function KimpList({ tickers }: KimpListProps) {

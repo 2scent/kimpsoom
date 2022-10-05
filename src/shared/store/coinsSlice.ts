@@ -1,18 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { Coin } from '../models';
-
 import { RootState } from './index';
 
-type SelectableCoin = Pick<Coin, 'ticker'>
-  & Pick<Partial<Coin>, 'koreaPrice' | 'foreignPrice'>
-  & { readonly selected?: boolean };
+type SelectableCoin = {
+  readonly ticker: string;
+  readonly koreaPrice?: number;
+  readonly foreignPrice?: number;
+  readonly selected?: boolean;
+};
 
-export interface CoinState {
+export interface CoinsState {
   readonly coins: SelectableCoin[];
 }
 
-const initialState: CoinState = {
+const initialState: CoinsState = {
   coins: [],
 };
 
