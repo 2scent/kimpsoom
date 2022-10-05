@@ -6,13 +6,13 @@ import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import useUpbitTickers from '../hooks/useUpbitTickers';
 
-import KimpContainer from './KimpContainer';
+import KimpListContainer from './KimpListContainer';
 
 jest.mock('../hooks/useConnectBybit');
 jest.mock('../hooks/useConnectUpbit');
 jest.mock('../hooks/useUpbitTickers');
 
-describe('KimpContainer', () => {
+describe('KimpListContainer', () => {
   const dispatch = jest.fn();
 
   beforeEach(() => {
@@ -24,16 +24,10 @@ describe('KimpContainer', () => {
     }));
   });
 
-  const renderKimpContainer = () => renderWithClient(<KimpContainer />);
-
-  it('renders heading', () => {
-    const { container } = renderKimpContainer();
-
-    expect(container).toHaveTextContent('김프');
-  });
+  const renderKimpListContainer = () => renderWithClient(<KimpListContainer />);
 
   it('renders tickers', () => {
-    const { container } = renderKimpContainer();
+    const { container } = renderKimpListContainer();
 
     TICKERS.forEach(
       (ticker) => expect(container).toHaveTextContent(ticker),
