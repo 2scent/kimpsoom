@@ -21,9 +21,7 @@ describe('UpbitTickersContainer', () => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     (useSelector as jest.Mock).mockReturnValue([]);
 
-    (useUpbitTickers as jest.Mock).mockImplementation(() => ({
-      data: TICKERS,
-    }));
+    (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
   });
 
   afterEach(() => {

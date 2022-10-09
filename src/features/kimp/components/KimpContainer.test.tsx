@@ -4,10 +4,13 @@ import TICKERS from '@fixtures/tickers';
 
 import { renderWithClient } from '@/shared/utils/testing/react-query';
 
+import useExchangeRate from '@/shared/hooks/useExchangeRate';
+
 import useUpbitTickers from '../hooks/useUpbitTickers';
 
 import KimpContainer from './KimpContainer';
 
+jest.mock('@/shared/hooks/useExchangeRate');
 jest.mock('../hooks/useConnectBybit');
 jest.mock('../hooks/useConnectUpbit');
 jest.mock('../hooks/useUpbitTickers');
@@ -19,9 +22,12 @@ describe('KimpContainer', () => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     (useSelector as jest.Mock).mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
 
-    (useUpbitTickers as jest.Mock).mockImplementation(() => ({
-      data: TICKERS,
-    }));
+    (useExchangeRate as jest.Mock).mockReturnValue({ data: 1380.0 });
+    (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   const renderKimpContainer = () => renderWithClient(<KimpContainer />);

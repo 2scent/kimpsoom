@@ -10,9 +10,11 @@ describe('ExchangeRateContainer', () => {
   const exchangeRate = 1312.00;
 
   beforeEach(() => {
-    (useExchangeRate as jest.Mock).mockImplementation(() => ({
-      data: exchangeRate,
-    }));
+    (useExchangeRate as jest.Mock).mockReturnValue({ data: exchangeRate });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   const renderExchangeRateContainer = () => render(<ExchangeRateContainer />);

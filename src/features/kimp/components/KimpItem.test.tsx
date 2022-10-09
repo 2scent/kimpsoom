@@ -16,17 +16,19 @@ describe('KimpItem', () => {
   };
   const exchangeRate = 1338.5;
 
+  beforeEach(() => {
+    (useExchangeRate as jest.Mock).mockReturnValue({ data: exchangeRate });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   const renderKimpItem = () => renderWithClient((
     <KimpItem
       coin={coin}
     />
   ));
-
-  beforeEach(() => {
-    (useExchangeRate as jest.Mock).mockImplementation(() => ({
-      data: exchangeRate,
-    }));
-  });
 
   it('renders ticker', () => {
     const { container } = renderKimpItem();
