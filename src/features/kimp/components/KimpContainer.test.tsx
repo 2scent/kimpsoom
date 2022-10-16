@@ -23,7 +23,6 @@ describe('KimpContainer', () => {
     (useSelector as jest.Mock).mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
 
     (useExchangeRate as jest.Mock).mockReturnValue({ data: 1380.0 });
-    (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
   });
 
   afterEach(() => {
@@ -32,17 +31,45 @@ describe('KimpContainer', () => {
 
   const renderKimpContainer = () => renderWithClient(<KimpContainer />);
 
-  it('renders heading', () => {
-    const { container } = renderKimpContainer();
+  context('when succeded', () => {
+    beforeEach(() => {
+      (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
+    });
 
-    expect(container).toHaveTextContent('김프');
+    it('renders tickers', () => {
+      const { container } = renderKimpContainer();
+
+      TICKERS.forEach(
+        (ticker) => expect(container).toHaveTextContent(ticker),
+      );
+    });
   });
 
-  it('renders tickers', () => {
-    const { container } = renderKimpContainer();
+  context('when loading', () => {
+    beforeEach(() => {
+      (useUpbitTickers as jest.Mock).mockImplementation(() => {
+        throw Promise.resolve();
+      });
+    });
 
-    TICKERS.forEach(
-      (ticker) => expect(container).toHaveTextContent(ticker),
-    );
+    it('renders loading alert', () => {
+      const { container } = renderKimpContainer();
+
+      expect(container).toHaveTextContent('로딩 중');
+    });
+  });
+
+  context('when failed', () => {
+    beforeEach(() => {
+      (useUpbitTickers as jest.Mock).mockImplementation(() => {
+        throw new Error();
+      });
+    });
+
+    it('renders error alert', () => {
+      const { container } = renderKimpContainer();
+
+      expect(container).toHaveTextContent('다시 불러오기');
+    });
   });
 });

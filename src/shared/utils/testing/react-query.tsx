@@ -7,6 +7,7 @@ import { render } from '@testing-library/react';
 const defaultOptions = {
   queries: {
     retry: false,
+    suspense: true,
   },
 };
 

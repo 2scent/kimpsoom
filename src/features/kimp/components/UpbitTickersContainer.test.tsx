@@ -20,8 +20,6 @@ describe('UpbitTickersContainer', () => {
   beforeEach(() => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     (useSelector as jest.Mock).mockReturnValue([]);
-
-    (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
   });
 
   afterEach(() => {
@@ -30,29 +28,57 @@ describe('UpbitTickersContainer', () => {
 
   const renderUpbitTickersContainer = () => render(<UpbitTickersContainer />);
 
-  it('renders heading', () => {
-    const { container } = renderUpbitTickersContainer();
+  context('when succeeded', () => {
+    beforeEach(() => {
+      (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
+    });
 
-    expect(container).toHaveTextContent('코인');
+    it('renders tickers', () => {
+      const { container } = renderUpbitTickersContainer();
+
+      TICKERS.forEach(
+        (ticker) => expect(container).toHaveTextContent(ticker),
+      );
+    });
+
+    it('listens click event', () => {
+      const user = userEvent.setup();
+      const { getByRole } = renderUpbitTickersContainer();
+
+      TICKERS.forEach(
+        async (ticker) => {
+          await user.click(getByRole('button', { name: ticker }));
+          expect(dispatch).toBeCalledWith(toggleSelectCoin({ ticker }));
+        },
+      );
+    });
   });
 
-  it('renders tickers', () => {
-    const { container } = renderUpbitTickersContainer();
+  context('when loading', () => {
+    beforeEach(() => {
+      (useUpbitTickers as jest.Mock).mockImplementation(() => {
+        throw Promise.resolve();
+      });
+    });
 
-    TICKERS.forEach(
-      (ticker) => expect(container).toHaveTextContent(ticker),
-    );
+    it('renders loading alert', () => {
+      const { container } = renderUpbitTickersContainer();
+
+      expect(container).toHaveTextContent('로딩 중');
+    });
   });
 
-  it('listens click event', () => {
-    const user = userEvent.setup();
-    const { getByRole } = renderUpbitTickersContainer();
+  context('when failed', () => {
+    beforeEach(() => {
+      (useUpbitTickers as jest.Mock).mockImplementation(() => {
+        throw new Error();
+      });
+    });
 
-    TICKERS.forEach(
-      async (ticker) => {
-        await user.click(getByRole('button', { name: ticker }));
-        expect(dispatch).toBeCalledWith(toggleSelectCoin({ ticker }));
-      },
-    );
+    it('renders error alert', () => {
+      const { container } = renderUpbitTickersContainer();
+
+      expect(container).toHaveTextContent('다시 불러오기');
+    });
   });
 });

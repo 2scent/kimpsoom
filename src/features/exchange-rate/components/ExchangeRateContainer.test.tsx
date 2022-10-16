@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
@@ -9,25 +9,49 @@ jest.mock('@/shared/hooks/useExchangeRate');
 describe('ExchangeRateContainer', () => {
   const exchangeRate = 1312.00;
 
-  beforeEach(() => {
-    (useExchangeRate as jest.Mock).mockReturnValue({ data: exchangeRate });
-  });
-
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  const renderExchangeRateContainer = () => render(<ExchangeRateContainer />);
+  const renderExchangeRateContainer = () => renderWithClient(<ExchangeRateContainer />);
 
-  it('renders heading', () => {
-    const { container } = renderExchangeRateContainer();
+  context('when succeeded', () => {
+    beforeEach(() => {
+      (useExchangeRate as jest.Mock).mockReturnValue({ data: exchangeRate });
+    });
 
-    expect(container).toHaveTextContent('환율');
+    it('renders exchange rate', () => {
+      const { container } = renderExchangeRateContainer();
+
+      expect(container).toHaveTextContent(exchangeRate.toFixed(2));
+    });
   });
 
-  it('renders exchange rate', () => {
-    const { container } = renderExchangeRateContainer();
+  context('when loading', () => {
+    beforeEach(() => {
+      (useExchangeRate as jest.Mock).mockImplementation(() => {
+        throw Promise.resolve();
+      });
+    });
 
-    expect(container).toHaveTextContent(exchangeRate.toFixed(2));
+    it('renders loading alert', () => {
+      const { container } = renderExchangeRateContainer();
+
+      expect(container).toHaveTextContent('로딩 중');
+    });
+  });
+
+  context('when failed', () => {
+    beforeEach(() => {
+      (useExchangeRate as jest.Mock).mockImplementation(() => {
+        throw new Error();
+      });
+    });
+
+    it('renders error alert', () => {
+      const { container } = renderExchangeRateContainer();
+
+      expect(container).toHaveTextContent('다시 불러오기');
+    });
   });
 });
