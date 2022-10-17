@@ -1,3 +1,3 @@
 # KIMPSOOM
 
-Demo: [https://2scent.github.io/kimpsoom/](https://2scent.github.io/kimpsoom/)
+Demo: [https://kimpsoom.vercel.app/](https://kimpsoom.vercel.app/)
