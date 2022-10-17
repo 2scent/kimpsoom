@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "target": "ES2015",
-    "module": "CommonJS",
+    "jsx": "preserve",
+    "target": "ES5",
+    "module": "ESNext",
     "allowJs": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -10,10 +10,30 @@
     "noEmit": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@fixtures/*": ["./fixtures/*"]
-    }
+      "@/*": [
+        "./src/*"
+      ],
+      "@fixtures/*": [
+        "./fixtures/*"
+      ]
+    },
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "incremental": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
-  
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }

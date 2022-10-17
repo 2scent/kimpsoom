@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
     "axios": "0.27.2",
+    "next": "12.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-error-boundary": "3.1.4",
@@ -25,10 +26,10 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "dev": "next dev",
+    "start": "next start",
+    "build": "next build",
+    "test": "next test"
   },
   "eslintConfig": {
     "extends": [
