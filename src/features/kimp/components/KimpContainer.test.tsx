@@ -1,5 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
+import mockConsole, { RestoreConsole } from 'jest-mock-console';
+
 import TICKERS from '@fixtures/tickers';
 
 import { renderWithClient } from '@/shared/utils/testing/react-query';
@@ -60,10 +62,18 @@ describe('KimpContainer', () => {
   });
 
   context('when failed', () => {
-    beforeEach(() => {
+    let restoreConsole : RestoreConsole;
+
+    beforeAll(() => {
+      restoreConsole = mockConsole();
+
       (useUpbitTickers as jest.Mock).mockImplementation(() => {
         throw new Error();
       });
+    });
+
+    afterAll(() => {
+      restoreConsole();
     });
 
     it('renders error alert', () => {

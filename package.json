@@ -70,6 +70,7 @@
     "eslint-plugin-react-hooks": "4.6.0",
     "gh-pages": "4.0.0",
     "given2": "2.1.7",
+    "jest-mock-console": "2.0.0",
     "jest-plugin-context": "2.9.0",
     "jest-websocket-mock": "2.4.0",
     "ts-jest": "27.1.5",

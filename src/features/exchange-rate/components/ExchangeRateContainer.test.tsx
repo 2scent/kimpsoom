@@ -1,3 +1,5 @@
+import mockConsole, { RestoreConsole } from 'jest-mock-console';
+
 import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import useExchangeRate from '@/shared/hooks/useExchangeRate';
@@ -42,10 +44,18 @@ describe('ExchangeRateContainer', () => {
   });
 
   context('when failed', () => {
-    beforeEach(() => {
+    let restoreConsole : RestoreConsole;
+
+    beforeAll(() => {
+      restoreConsole = mockConsole();
+
       (useExchangeRate as jest.Mock).mockImplementation(() => {
         throw new Error();
       });
+    });
+
+    afterAll(() => {
+      restoreConsole();
     });
 
     it('renders error alert', () => {
