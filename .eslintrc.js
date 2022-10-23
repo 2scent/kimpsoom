@@ -68,6 +68,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     'react/jsx-filename-extension': [
       1,
       {

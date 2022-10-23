@@ -57,7 +57,7 @@ describe('UpbitTickersContainer', () => {
   context('when loading', () => {
     beforeEach(() => {
       (useUpbitTickers as jest.Mock).mockImplementation(() => {
-        throw Promise.resolve();
+        throw new Promise(() => {});
       });
     });
 

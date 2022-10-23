@@ -30,7 +30,7 @@ describe('ExchangeRateContainer', () => {
   context('when loading', () => {
     beforeEach(() => {
       (useExchangeRate as jest.Mock).mockImplementation(() => {
-        throw Promise.resolve();
+        throw new Promise(() => {});
       });
     });
 
