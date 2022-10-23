@@ -25,9 +25,11 @@ describe('KimpItem', () => {
   });
 
   const renderKimpItem = () => renderWithClient((
-    <KimpItem
-      coin={coin}
-    />
+    <table>
+      <tbody>
+        <KimpItem coin={coin} />
+      </tbody>
+    </table>
   ));
 
   it('renders ticker', () => {
