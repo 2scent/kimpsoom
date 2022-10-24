@@ -1,10 +1,15 @@
 import TICKERS from '@fixtures/tickers';
 
+import { RootState } from './index';
+
 import reducer, {
   changeForeignPrice,
   changeKoreaPrice,
+  coinsSelector,
   initCoins,
   selectCoins,
+  selectedCoinsSelector,
+  selectedTickersSelector,
   toggleSelectCoin,
 } from './coinsSlice';
 
@@ -158,6 +163,51 @@ describe('coinsSlice', () => {
       const eth = state.coins.find((coin) => coin.ticker === ticker)!;
 
       expect(eth.foreignPrice).toBe(foreignPrice);
+    });
+  });
+
+  describe('selectors', () => {
+    const coins = [
+      { ticker: 'BTC', foreignPrice: 0.0, selected: true },
+      { ticker: 'ETH', foreignPrice: 0.0, selected: true },
+      { ticker: 'XRP', foreignPrice: 0.0, selected: false },
+      { ticker: 'ADA', foreignPrice: 0.0, selected: true },
+    ];
+
+    const rootState = {
+      coins: {
+        coins,
+      },
+    } as RootState;
+
+    describe('coinsSelector', () => {
+      it('returns all coins', () => {
+        const allCoins = coinsSelector(rootState);
+
+        expect(allCoins).toEqual(coins);
+      });
+    });
+
+    describe('selectedCoinsSelector', () => {
+      it('returns selected coins', () => {
+        const selectedCoins = selectedCoinsSelector(rootState);
+
+        expect(selectedCoins).toEqual((
+          coins.filter((coin) => coin.selected)
+        ));
+      });
+    });
+
+    describe('selectedTickersSelector', () => {
+      it('returns tickers of selected coins', () => {
+        const selectedTickers = selectedTickersSelector(rootState);
+
+        expect(selectedTickers).toEqual((
+          coins
+            .filter((coin) => coin.selected)
+            .map((coin) => coin.ticker)
+        ));
+      });
     });
   });
 });
