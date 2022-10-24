@@ -1,6 +1,6 @@
 import { TableBody } from '@mui/material';
 
-import stableSort from '@/shared/utils/stableSort';
+import stableSort from '@/shared/utils/sort/stable-sort';
 
 import { useSortableTableContext } from '../useSortableTableContext';
 
