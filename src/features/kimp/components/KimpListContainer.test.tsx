@@ -20,10 +20,10 @@ describe('KimpListContainer', () => {
 
   beforeEach(() => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
-    (useSelector as jest.Mock).mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
+    (useSelector as jest.Mock).mockImplementation(() => given.selectedTickers);
 
     (useExchangeRate as jest.Mock).mockReturnValue({ data: 1380.0 });
-    (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
+    (useUpbitTickers as jest.Mock).mockReturnValue({ data: given.tickers });
   });
 
   afterEach(() => {
@@ -32,11 +32,29 @@ describe('KimpListContainer', () => {
 
   const renderKimpListContainer = () => renderWithClient(<KimpListContainer />);
 
-  it('renders tickers', () => {
-    const { container } = renderKimpListContainer();
+  context('with tickers', () => {
+    given('tickers', () => TICKERS);
+    given('selectedTickers', () => TICKERS.map((ticker) => ({ ticker })));
 
-    TICKERS.forEach(
-      (ticker) => expect(container).toHaveTextContent(ticker),
-    );
+    it('renders tickers', () => {
+      const { container } = renderKimpListContainer();
+
+      TICKERS.forEach(
+        (ticker) => expect(container).toHaveTextContent(ticker),
+      );
+    });
+  });
+
+  context('without tickers', () => {
+    given('tickers', () => undefined);
+    given('selectedTickers', () => []);
+
+    it("doesn't render tickers", () => {
+      const { container } = renderKimpListContainer();
+
+      TICKERS.forEach(
+        (ticker) => expect(container).not.toHaveTextContent(ticker),
+      );
+    });
   });
 });
