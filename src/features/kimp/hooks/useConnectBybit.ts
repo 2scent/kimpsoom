@@ -6,11 +6,7 @@ import useThrottle from '@/shared/hooks/useThrottle';
 
 import { changeForeignPrice } from '@/shared/store/coinsSlice';
 
-export interface UseConnectBybitParams {
-  tickers: string[];
-}
-
-export default function useConnectBybit({ tickers = [] }: UseConnectBybitParams) {
+export default function useConnectBybit(tickers: string[]) {
   const dispatch = useDispatch();
   const throttle = useThrottle(500);
 

@@ -83,7 +83,7 @@ function KimpList({ tickers }: KimpListProps) {
   }, []);
 
   useConnectUpbit({ tickers });
-  useConnectBybit({ tickers });
+  useConnectBybit(tickers);
 
   const coins = useSelector(selectedCoinsSelector);
 

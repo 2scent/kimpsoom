@@ -6,15 +6,15 @@ import { useDispatch } from 'react-redux';
 
 import { changeForeignPrice } from '@/shared/store/coinsSlice';
 
-import useConnectBybit, { UseConnectBybitParams } from './useConnectBybit';
+import useConnectBybit from './useConnectBybit';
 
 jest.mock('@tanstack/react-query');
 
 describe('useConnectBybit', () => {
   const dispatch = jest.fn();
 
-  const renderUseConnectBybit = ({ tickers }: UseConnectBybitParams) => renderHook((
-    () => useConnectBybit({ tickers })
+  const renderUseConnectBybit = ({ tickers }: { tickers: string[] }) => renderHook((
+    () => useConnectBybit(tickers)
   ));
 
   let server: WS;

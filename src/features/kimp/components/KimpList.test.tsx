@@ -54,8 +54,6 @@ describe('KimpList', () => {
   it('calls useConnectBybit with tickers', () => {
     renderKimpList();
 
-    expect(useConnectBybit).toBeCalledWith({
-      tickers: TICKERS,
-    });
+    expect(useConnectBybit).toBeCalledWith(TICKERS);
   });
 });
