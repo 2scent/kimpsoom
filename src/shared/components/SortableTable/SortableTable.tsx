@@ -8,19 +8,10 @@ import {
 
 import { SortableTableProvider } from './useSortableTableContext';
 
+import { Order, OrderBy, SortableColumn } from './utils';
+
 import Header from './components/Header';
 import Items from './components/Items';
-
-export type Order = 'asc' | 'desc';
-
-export type OrderBy = string | undefined;
-
-export interface SortableColumn<T> {
-  id: string;
-  label: string;
-  numeric: boolean;
-  comparator: (a: T, b: T) => number;
-}
 
 type SortableTableProps<T> = {
   columns: SortableColumn<T>[];

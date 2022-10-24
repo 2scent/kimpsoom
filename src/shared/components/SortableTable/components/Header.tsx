@@ -9,7 +9,10 @@ import { useSortableTableContext } from '../useSortableTableContext';
 function Header() {
   const {
     columns,
-    order, setOrder, orderBy, setOrderBy,
+    order,
+    setOrder,
+    orderBy,
+    setOrderBy,
   } = useSortableTableContext();
 
   const createSortHandler = (property: string) => () => {
