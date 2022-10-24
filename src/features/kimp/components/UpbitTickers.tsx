@@ -1,6 +1,6 @@
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import {
   selectedTickersSelector,
@@ -8,6 +8,8 @@ import {
 } from '@/shared/store/coinsSlice';
 
 import useUpbitTickers from '../hooks/useUpbitTickers';
+
+import TickerButton from './TickerButton';
 
 function UpbitTickers() {
   const dispatch = useDispatch();
@@ -30,13 +32,11 @@ function UpbitTickers() {
             item
             xs={1}
           >
-            <Button
-              fullWidth
-              variant={selectedTickers.includes(ticker) ? 'contained' : 'outlined'}
-              onClick={() => handleClickTicker(ticker)}
-            >
-              {ticker}
-            </Button>
+            <TickerButton
+              ticker={ticker}
+              selected={selectedTickers.includes(ticker)}
+              onClick={handleClickTicker}
+            />
           </Grid>
         ))}
     </Grid>

@@ -1,4 +1,4 @@
-import userEvent from '@testing-library/user-event';
+import { fireEvent } from '@testing-library/react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -39,12 +39,11 @@ describe('UpbitTickersContainer', () => {
   });
 
   it('listens click event', () => {
-    const user = userEvent.setup();
     const { getByRole } = renderUpbitTickersContainer();
 
     TICKERS.forEach(
-      async (ticker) => {
-        await user.click(getByRole('button', { name: ticker }));
+      (ticker) => {
+        fireEvent.click(getByRole('button', { name: ticker }));
         expect(dispatch).toBeCalledWith(toggleSelectCoin({ ticker }));
       },
     );
