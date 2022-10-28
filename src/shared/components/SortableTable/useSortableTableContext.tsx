@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-import { SortableColumn, Order, OrderBy } from './SortableTable';
+import { SortableColumn, Order, OrderBy } from './utils';
 
 type ContextProps<T> = {
   columns: SortableColumn<T>[];
