@@ -10,51 +10,43 @@ import {
 
 import SortableTable, { SortableColumn } from '@/shared/components/SortableTable';
 
+import {
+  Coin,
+  foreignPriceComparator,
+  kimpComparator,
+  koreaPriceComparator,
+  tickerCompartor,
+} from '../utils/comparators';
+
 import useConnectBybit from '../hooks/useConnectBybit';
 import useConnectUpbit from '../hooks/useConnectUpbit';
 
 import KimpItem from './KimpItem';
-
-type Coin = {
-  ticker: string;
-  koreaPrice?: number;
-  foreignPrice?: number;
-  kimp?: unknown;
-};
 
 const columns: SortableColumn<Coin>[] = [
   {
     id: 'ticker',
     numeric: false,
     label: '코인',
-    comparator: (a, b) => {
-      if (b.ticker < a.ticker) {
-        return -1;
-      }
-      if (b.ticker > a.ticker) {
-        return 1;
-      }
-      return 0;
-    },
+    comparator: tickerCompartor,
   },
   {
     id: 'foreignPrice',
     numeric: true,
     label: 'bybit ($)',
-    comparator: (a, b) => (a.foreignPrice ?? 0) - (b.foreignPrice ?? 0),
+    comparator: foreignPriceComparator,
   },
   {
     id: 'koreaPrice',
     numeric: true,
     label: 'upbit (￦)',
-    comparator: (a, b) => (a.koreaPrice ?? 0) - (b.koreaPrice ?? 0),
+    comparator: koreaPriceComparator,
   },
   {
     id: 'kimp',
     numeric: true,
     label: '김치 프리미엄 (￦)',
-    comparator: (a, b) => ((a.koreaPrice ?? 0) / (a.foreignPrice ?? 0))
-      - ((b.koreaPrice ?? 0) / (b.foreignPrice ?? 0)),
+    comparator: kimpComparator,
   },
 ];
 
