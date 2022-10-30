@@ -19,6 +19,8 @@ describe('SortableTable.Header', () => {
 
   (useSortableTableContext as jest.Mock).mockImplementation(() => ({
     columns,
+    order: given.order,
+    orderBy: 'id',
     setOrder,
     setOrderBy,
   }));
@@ -29,12 +31,37 @@ describe('SortableTable.Header', () => {
     </table>
   ));
 
-  it('listens label click event', () => {
-    const { getByRole } = renderHeader();
+  context('when label is clicked', () => {
+    it('changes orderBy to column id', () => {
+      const { getByRole } = renderHeader();
 
-    fireEvent.click(getByRole('button', { name: 'label' }));
+      fireEvent.click(getByRole('button', { name: 'label' }));
 
-    expect(setOrder).toBeCalled();
-    expect(setOrderBy).toBeCalled();
+      expect(setOrderBy).toBeCalledWith('id');
+    });
+
+    context('with ascending order', () => {
+      it('changes order to descending', () => {
+        given('order', () => 'asc');
+
+        const { getByRole } = renderHeader();
+
+        fireEvent.click(getByRole('button', { name: 'label' }));
+
+        expect(setOrder).toBeCalledWith('desc');
+      });
+    });
+
+    context('with descending order', () => {
+      it('changes order to ascending', () => {
+        given('order', () => 'desc');
+
+        const { getByRole } = renderHeader();
+
+        fireEvent.click(getByRole('button', { name: 'label' }));
+
+        expect(setOrder).toBeCalledWith('asc');
+      });
+    });
   });
 });

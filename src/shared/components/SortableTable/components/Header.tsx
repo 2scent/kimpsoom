@@ -10,15 +10,15 @@ function Header() {
   const {
     columns,
     order,
-    setOrder,
     orderBy,
+    setOrder,
     setOrderBy,
   } = useSortableTableContext();
 
-  const createSortHandler = (property: string) => () => {
-    const isAsc = orderBy === property && order === 'asc';
+  const createSortHandler = (columndId: string) => () => {
+    const isAsc = orderBy === columndId && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
+    setOrderBy(columndId);
   };
 
   return (
