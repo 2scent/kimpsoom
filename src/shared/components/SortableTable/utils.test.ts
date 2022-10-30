@@ -25,4 +25,12 @@ describe('getComparator', () => {
       expect(comparator(200, 100)).toBeLessThan(0);
     });
   });
+
+  context('without comparator', () => {
+    const comparator = getComparator(columns, 'asc', 'default');
+
+    it('returns default comparator', () => {
+      expect(comparator(200, 100)).toBe(0);
+    });
+  });
 });
