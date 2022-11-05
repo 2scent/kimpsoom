@@ -13,10 +13,6 @@ jest.mock('@tanstack/react-query');
 describe('useConnectBybit', () => {
   const dispatch = jest.fn();
 
-  const renderUseConnectBybit = ({ tickers }: { tickers: string[] }) => renderHook((
-    () => useConnectBybit(tickers)
-  ));
-
   let server: WS;
 
   beforeEach(() => {
@@ -31,8 +27,12 @@ describe('useConnectBybit', () => {
     jest.clearAllMocks();
   });
 
+  const renderUseConnectBybit = (tickers: string[]) => renderHook((
+    () => useConnectBybit(tickers)
+  ));
+
   it('connects bybit with WebSocket', async () => {
-    renderUseConnectBybit({ tickers: [] });
+    renderUseConnectBybit([]);
 
     expect(await server.connected).toBeTruthy();
   });
@@ -40,7 +40,7 @@ describe('useConnectBybit', () => {
   it('sends request message', async () => {
     const tickers = ['BTC', 'ETH'];
 
-    renderUseConnectBybit({ tickers });
+    renderUseConnectBybit(tickers);
 
     await server.connected;
 
@@ -68,7 +68,7 @@ describe('useConnectBybit', () => {
     };
 
     it('calls setQueryData', async () => {
-      renderUseConnectBybit({ tickers: [] });
+      renderUseConnectBybit([]);
 
       await server.connected;
 
@@ -91,7 +91,7 @@ describe('useConnectBybit', () => {
     };
 
     it('does nothing', async () => {
-      renderUseConnectBybit({ tickers: [] });
+      renderUseConnectBybit([]);
 
       await server.connected;
 

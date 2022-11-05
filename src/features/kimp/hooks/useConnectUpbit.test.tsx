@@ -13,10 +13,6 @@ jest.mock('@tanstack/react-query');
 describe('useConnectUpbit', () => {
   const dispatch = jest.fn();
 
-  const renderUseConnectUpbit = ({ tickers }: { tickers: string[] }) => renderHook((
-    () => useConnectUpbit(tickers)
-  ));
-
   let server: WS;
 
   beforeEach(() => {
@@ -31,8 +27,12 @@ describe('useConnectUpbit', () => {
     jest.clearAllMocks();
   });
 
+  const renderUseConnectUpbit = (tickers: string[]) => renderHook((
+    () => useConnectUpbit(tickers)
+  ));
+
   it('connects upbit with WebSocket', async () => {
-    renderUseConnectUpbit({ tickers: [] });
+    renderUseConnectUpbit([]);
 
     expect(await server.connected).toBeTruthy();
   });
@@ -47,7 +47,7 @@ describe('useConnectUpbit', () => {
       },
     ];
 
-    renderUseConnectUpbit({ tickers });
+    renderUseConnectUpbit(tickers);
 
     await server.connected;
 
@@ -61,7 +61,7 @@ describe('useConnectUpbit', () => {
     };
 
     it('calls setQueryData', async () => {
-      renderUseConnectUpbit({ tickers: [] });
+      renderUseConnectUpbit([]);
 
       await server.connected;
 
