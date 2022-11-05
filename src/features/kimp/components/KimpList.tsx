@@ -50,7 +50,7 @@ const columns: SortableColumn<Coin>[] = [
   },
 ];
 
-const defaultSelectTickers = [
+export const defaultSelectedTickers = [
   'BTC',
   'ETH',
   'BCH',
@@ -62,16 +62,16 @@ const defaultSelectTickers = [
   'TRX',
 ];
 
-type KimpListProps = {
+interface KimpListProps {
   tickers: string[];
-};
+}
 
 function KimpList({ tickers }: KimpListProps) {
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(initCoins({ tickers }));
-    dispatch(selectCoins({ tickers: defaultSelectTickers }));
+    dispatch(selectCoins({ tickers: defaultSelectedTickers }));
   }, []);
 
   useConnectUpbit(tickers);

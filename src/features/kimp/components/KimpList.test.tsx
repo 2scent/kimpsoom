@@ -6,10 +6,12 @@ import { renderWithClient } from '@/shared/utils/testing/react-query';
 
 import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
+import { initCoins, selectCoins } from '@/shared/store/coinsSlice';
+
 import useConnectBybit from '../hooks/useConnectBybit';
 import useConnectUpbit from '../hooks/useConnectUpbit';
 
-import KimpList from './KimpList';
+import KimpList, { defaultSelectedTickers } from './KimpList';
 
 jest.mock('@/shared/hooks/useExchangeRate');
 jest.mock('../hooks/useConnectBybit');
@@ -18,7 +20,7 @@ jest.mock('../hooks/useConnectUpbit');
 describe('KimpList', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
+  beforeAll(() => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     (useSelector as jest.Mock).mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
 
@@ -38,9 +40,21 @@ describe('KimpList', () => {
   it('renders tickers', () => {
     const { container } = renderKimpList();
 
-    TICKERS.forEach(
-      (ticker) => expect(container).toHaveTextContent(ticker),
-    );
+    TICKERS.forEach((
+      (ticker) => expect(container).toHaveTextContent(ticker)
+    ));
+  });
+
+  it('dispatches initCoins with tickers', () => {
+    renderKimpList();
+
+    expect(dispatch).toBeCalledWith(initCoins({ tickers: TICKERS }));
+  });
+
+  it('dispatches selectCoins with defaultSelectedTickers', () => {
+    renderKimpList();
+
+    expect(dispatch).toBeCalledWith(selectCoins({ tickers: defaultSelectedTickers }));
   });
 
   it('calls useConnectUpbit with tickers', () => {
