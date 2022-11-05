@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-type Market = {
+interface Market {
   market: string;
 }
 
