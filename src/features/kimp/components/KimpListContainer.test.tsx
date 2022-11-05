@@ -18,7 +18,7 @@ jest.mock('../hooks/useUpbitTickers');
 describe('KimpListContainer', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
+  beforeAll(() => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     (useSelector as jest.Mock).mockImplementation(() => given.selectedTickers);
 
@@ -39,9 +39,9 @@ describe('KimpListContainer', () => {
     it('renders tickers', () => {
       const { container } = renderKimpListContainer();
 
-      TICKERS.forEach(
-        (ticker) => expect(container).toHaveTextContent(ticker),
-      );
+      TICKERS.forEach((
+        (ticker) => expect(container).toHaveTextContent(ticker)
+      ));
     });
   });
 
@@ -52,9 +52,9 @@ describe('KimpListContainer', () => {
     it("doesn't render tickers", () => {
       const { container } = renderKimpListContainer();
 
-      TICKERS.forEach(
-        (ticker) => expect(container).not.toHaveTextContent(ticker),
-      );
+      TICKERS.forEach((
+        (ticker) => expect(container).not.toHaveTextContent(ticker)
+      ));
     });
   });
 });
