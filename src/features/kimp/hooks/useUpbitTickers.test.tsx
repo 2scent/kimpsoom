@@ -10,12 +10,12 @@ import useUpbitTickers from './useUpbitTickers';
 
 jest.mock('../api/fetchUpbitTickers');
 
-describe('useUpbitCoins', () => {
-  beforeEach(() => {
+describe('useUpbitTickers', () => {
+  beforeAll(() => {
     (fetchUpbitTickers as jest.Mock).mockResolvedValue(TICKERS);
   });
 
-  it('returns upbit krw market tickers', async () => {
+  it('returns upbit tickers', async () => {
     const { result } = renderHook(() => useUpbitTickers(), {
       wrapper: createWrapper(),
     });
