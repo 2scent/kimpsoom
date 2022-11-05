@@ -20,7 +20,7 @@ jest.mock('../hooks/useUpbitTickers');
 describe('KimpContainer', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
+  beforeAll(() => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     (useSelector as jest.Mock).mockReturnValue(TICKERS.map((ticker) => ({ ticker })));
 
@@ -33,8 +33,16 @@ describe('KimpContainer', () => {
 
   const renderKimpContainer = () => renderWithClient(<KimpContainer />);
 
+  it('renders heading', () => {
+    (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
+
+    const { container } = renderKimpContainer();
+
+    expect(container).toHaveTextContent('김프');
+  });
+
   context('when succeded', () => {
-    beforeEach(() => {
+    beforeAll(() => {
       (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
     });
 
@@ -48,7 +56,7 @@ describe('KimpContainer', () => {
   });
 
   context('when loading', () => {
-    beforeEach(() => {
+    beforeAll(() => {
       (useUpbitTickers as jest.Mock).mockImplementation(() => {
         throw new Promise(() => {});
       });
