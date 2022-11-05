@@ -14,62 +14,39 @@ import reducer, {
 } from './coinsSlice';
 
 describe('coinsSlice', () => {
-  context('when previous state is undefined', () => {
-    const initialState = {
-      coins: [],
-    };
+  describe('reducer', () => {
+    context('when previous state is undefined', () => {
+      const initialState = {
+        coins: [],
+      };
 
-    it('returns the initial state', () => {
-      const state = reducer(undefined, { type: 'action' });
+      it('returns the initial state', () => {
+        const state = reducer(undefined, { type: 'action' });
 
-      expect(state).toEqual(initialState);
+        expect(state).toEqual(initialState);
+      });
     });
-  });
 
-  describe('initCoins', () => {
-    const initialState = {
-      coins: [],
-    };
+    describe('initCoins', () => {
+      const initialState = {
+        coins: [],
+      };
 
-    it('initializes coins', () => {
-      const state = reducer(initialState, initCoins({ tickers: TICKERS }));
+      it('initializes coins', () => {
+        const state = reducer(initialState, initCoins({ tickers: TICKERS }));
 
-      expect(state.coins).toEqual(
-        TICKERS.map((ticker) => ({
-          ticker,
-          koreaPrice: null,
-          foreignPrice: null,
-          selected: false,
-        })),
-      );
+        expect(state.coins).toEqual(
+          TICKERS.map((ticker) => ({
+            ticker,
+            koreaPrice: null,
+            foreignPrice: null,
+            selected: false,
+          })),
+        );
+      });
     });
-  });
 
-  describe('selectCoins', () => {
-    const initialState = {
-      coins: [
-        { ticker: 'BTC', selected: false },
-        { ticker: 'ETH', selected: false },
-        { ticker: 'XRP', selected: false },
-        { ticker: 'ADA', selected: false },
-      ],
-    };
-
-    it('changes coins to selected', () => {
-      const tickers = ['BTC', 'XRP'];
-
-      const state = reducer(initialState, selectCoins({ tickers }));
-
-      const selectedTickers = state.coins
-        .filter((coin) => coin.selected)
-        .map((coin) => coin.ticker);
-
-      expect(selectedTickers).toEqual(tickers);
-    });
-  });
-
-  describe('toggleSelectCoin', () => {
-    context('with selected coins', () => {
+    describe('selectCoins', () => {
       const initialState = {
         coins: [
           { ticker: 'BTC', selected: false },
@@ -79,90 +56,115 @@ describe('coinsSlice', () => {
         ],
       };
 
-      it('changes coins to unselected', () => {
-        const ticker = 'BTC';
+      it('changes coins to selected', () => {
+        const tickers = ['BTC', 'XRP'];
 
-        const state = reducer(initialState, toggleSelectCoin({ ticker }));
+        const state = reducer(initialState, selectCoins({ tickers }));
 
         const selectedTickers = state.coins
           .filter((coin) => coin.selected)
           .map((coin) => coin.ticker);
 
-        expect(selectedTickers).toContain(ticker);
+        expect(selectedTickers).toEqual(tickers);
       });
     });
 
-    context('with unselected coins', () => {
+    describe('toggleSelectCoin', () => {
+      context('with selected coins', () => {
+        const initialState = {
+          coins: [
+            { ticker: 'BTC', selected: false },
+            { ticker: 'ETH', selected: false },
+            { ticker: 'XRP', selected: false },
+            { ticker: 'ADA', selected: false },
+          ],
+        };
+
+        it('changes coin to unselected', () => {
+          const ticker = 'BTC';
+
+          const state = reducer(initialState, toggleSelectCoin({ ticker }));
+
+          const selectedTickers = state.coins
+            .filter((coin) => coin.selected)
+            .map((coin) => coin.ticker);
+
+          expect(selectedTickers).toContain(ticker);
+        });
+      });
+
+      context('with unselected coins', () => {
+        const initialState = {
+          coins: [
+            { ticker: 'BTC', selected: true },
+            { ticker: 'ETH', selected: true },
+            { ticker: 'XRP', selected: true },
+            { ticker: 'ADA', selected: true },
+          ],
+        };
+
+        it('changes coin to selected', () => {
+          const ticker = 'BTC';
+
+          const state = reducer(initialState, toggleSelectCoin({ ticker }));
+
+          const selectedTickers = state.coins
+            .filter((coin) => coin.selected)
+            .map((coin) => coin.ticker);
+
+          expect(selectedTickers).not.toContain(ticker);
+        });
+      });
+    });
+
+    describe('changeKoreaPrice', () => {
       const initialState = {
         coins: [
-          { ticker: 'BTC', selected: true },
-          { ticker: 'ETH', selected: true },
-          { ticker: 'XRP', selected: true },
-          { ticker: 'ADA', selected: true },
+          { ticker: 'BTC', koreaPrice: 0.0 },
+          { ticker: 'ETH', koreaPrice: 0.0 },
+          { ticker: 'XRP', koreaPrice: 0.0 },
+          { ticker: 'ADA', koreaPrice: 0.0 },
         ],
       };
 
-      it('changes coins to selected', () => {
+      it('changes korea price of coin', () => {
         const ticker = 'BTC';
+        const koreaPrice = 27359000;
 
-        const state = reducer(initialState, toggleSelectCoin({ ticker }));
+        const state = reducer(
+          initialState,
+          changeKoreaPrice({ ticker, koreaPrice }),
+        );
 
-        const selectedTickers = state.coins
-          .filter((coin) => coin.selected)
-          .map((coin) => coin.ticker);
+        const btc = state.coins.find((coin) => coin.ticker === ticker)!;
 
-        expect(selectedTickers).not.toContain(ticker);
+        expect(btc.koreaPrice).toBe(koreaPrice);
       });
     });
-  });
 
-  describe('changeKoreaPrice', () => {
-    const initialState = {
-      coins: [
-        { ticker: 'BTC', koreaPrice: 0.0 },
-        { ticker: 'ETH', koreaPrice: 0.0 },
-        { ticker: 'XRP', koreaPrice: 0.0 },
-        { ticker: 'ADA', koreaPrice: 0.0 },
-      ],
-    };
+    describe('changeForeignPrice', () => {
+      const initialState = {
+        coins: [
+          { ticker: 'BTC', foreignPrice: 0.0 },
+          { ticker: 'ETH', foreignPrice: 0.0 },
+          { ticker: 'XRP', foreignPrice: 0.0 },
+          { ticker: 'ADA', foreignPrice: 0.0 },
+        ],
+      };
 
-    it('changes korea price', () => {
-      const ticker = 'BTC';
-      const koreaPrice = 27359000;
+      it('changes foreign price of coin', () => {
+        const ticker = 'ETH';
+        const foreignPrice = 1556.45;
 
-      const state = reducer(
-        initialState,
-        changeKoreaPrice({ ticker, koreaPrice }),
-      );
+        const state = reducer(
+          initialState,
+          changeForeignPrice({ ticker, foreignPrice }),
+        );
 
-      const btc = state.coins.find((coin) => coin.ticker === ticker)!;
+        const eth = state.coins.find((coin) => coin.ticker === ticker)!;
 
-      expect(btc.koreaPrice).toBe(koreaPrice);
-    });
-  });
-
-  describe('changeForeignPrice', () => {
-    const initialState = {
-      coins: [
-        { ticker: 'BTC', foreignPrice: 0.0 },
-        { ticker: 'ETH', foreignPrice: 0.0 },
-        { ticker: 'XRP', foreignPrice: 0.0 },
-        { ticker: 'ADA', foreignPrice: 0.0 },
-      ],
-    };
-
-    it('changes foreign price', () => {
-      const ticker = 'ETH';
-      const foreignPrice = 1556.45;
-
-      const state = reducer(
-        initialState,
-        changeForeignPrice({ ticker, foreignPrice }),
-      );
-
-      const eth = state.coins.find((coin) => coin.ticker === ticker)!;
-
-      expect(eth.foreignPrice).toBe(foreignPrice);
+        expect(eth.foreignPrice).toBe(foreignPrice);
+      });
     });
   });
 
