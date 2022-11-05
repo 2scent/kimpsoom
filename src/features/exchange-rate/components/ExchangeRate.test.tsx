@@ -17,10 +17,6 @@ describe('ExchangeRate', () => {
     jest.clearAllMocks();
   });
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
   const renderExchangeRate = () => renderWithClient(<ExchangeRate />);
 
   it('renders exchange rate', () => {

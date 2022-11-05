@@ -17,8 +17,16 @@ describe('ExchangeRateContainer', () => {
 
   const renderExchangeRateContainer = () => renderWithClient(<ExchangeRateContainer />);
 
+  it('renders heading', () => {
+    (useExchangeRate as jest.Mock).mockReturnValue({ data: exchangeRate });
+
+    const { container } = renderExchangeRateContainer();
+
+    expect(container).toHaveTextContent('환율');
+  });
+
   context('when succeeded', () => {
-    beforeEach(() => {
+    beforeAll(() => {
       (useExchangeRate as jest.Mock).mockReturnValue({ data: exchangeRate });
     });
 
@@ -30,7 +38,7 @@ describe('ExchangeRateContainer', () => {
   });
 
   context('when loading', () => {
-    beforeEach(() => {
+    beforeAll(() => {
       (useExchangeRate as jest.Mock).mockImplementation(() => {
         throw new Promise(() => {});
       });
