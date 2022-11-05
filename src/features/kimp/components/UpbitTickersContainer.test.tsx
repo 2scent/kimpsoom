@@ -1,14 +1,10 @@
 import { render } from '@testing-library/react';
 
-import userEvent from '@testing-library/user-event';
-
 import { useDispatch, useSelector } from 'react-redux';
 
 import mockConsole, { RestoreConsole } from 'jest-mock-console';
 
 import TICKERS from '@fixtures/tickers';
-
-import { toggleSelectCoin } from '@/shared/store/coinsSlice';
 
 import useUpbitTickers from '../hooks/useUpbitTickers';
 
@@ -19,7 +15,7 @@ jest.mock('../hooks/useUpbitTickers');
 describe('UpbitTickersContainer', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
+  beforeAll(() => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     (useSelector as jest.Mock).mockReturnValue([]);
   });
@@ -30,8 +26,16 @@ describe('UpbitTickersContainer', () => {
 
   const renderUpbitTickersContainer = () => render(<UpbitTickersContainer />);
 
+  it('renders heading', () => {
+    (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
+
+    const { container } = renderUpbitTickersContainer();
+
+    expect(container).toHaveTextContent('코인');
+  });
+
   context('when succeeded', () => {
-    beforeEach(() => {
+    beforeAll(() => {
       (useUpbitTickers as jest.Mock).mockReturnValue({ data: TICKERS });
     });
 
@@ -42,22 +46,10 @@ describe('UpbitTickersContainer', () => {
         (ticker) => expect(container).toHaveTextContent(ticker),
       );
     });
-
-    it('listens click event', () => {
-      const user = userEvent.setup();
-      const { getByRole } = renderUpbitTickersContainer();
-
-      TICKERS.forEach(
-        async (ticker) => {
-          await user.click(getByRole('button', { name: ticker }));
-          expect(dispatch).toBeCalledWith(toggleSelectCoin({ ticker }));
-        },
-      );
-    });
   });
 
   context('when loading', () => {
-    beforeEach(() => {
+    beforeAll(() => {
       (useUpbitTickers as jest.Mock).mockImplementation(() => {
         throw new Promise(() => {});
       });
