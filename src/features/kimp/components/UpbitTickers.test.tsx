@@ -17,7 +17,7 @@ jest.mock('../hooks/useUpbitTickers');
 describe('UpbitTickersContainer', () => {
   const dispatch = jest.fn();
 
-  beforeEach(() => {
+  beforeAll(() => {
     (useDispatch as jest.Mock).mockReturnValue(dispatch);
     (useSelector as jest.Mock).mockReturnValue([]);
 
@@ -33,19 +33,19 @@ describe('UpbitTickersContainer', () => {
   it('renders tickers', () => {
     const { container } = renderUpbitTickersContainer();
 
-    TICKERS.forEach(
-      (ticker) => expect(container).toHaveTextContent(ticker),
-    );
+    TICKERS.forEach((
+      (ticker) => expect(container).toHaveTextContent(ticker)
+    ));
   });
 
   it('listens click event', () => {
     const { getByRole } = renderUpbitTickersContainer();
 
-    TICKERS.forEach(
+    TICKERS.forEach((
       (ticker) => {
         fireEvent.click(getByRole('button', { name: ticker }));
         expect(dispatch).toBeCalledWith(toggleSelectCoin({ ticker }));
-      },
-    );
+      }
+    ));
   });
 });
