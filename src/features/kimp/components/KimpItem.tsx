@@ -7,13 +7,13 @@ import useExchangeRate from '@/shared/hooks/useExchangeRate';
 
 import calculatePremium from '../utils/calculatePremium';
 
-type KimpItemProps = {
+interface KimpItemProps {
   coin: {
-    readonly ticker: string;
-    readonly koreaPrice?: number;
-    readonly foreignPrice?: number;
+    ticker: string;
+    koreaPrice?: number;
+    foreignPrice?: number;
   };
-};
+}
 
 function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }: KimpItemProps) {
   const { data: exchangeRate } = useExchangeRate();

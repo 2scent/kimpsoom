@@ -9,64 +9,95 @@ import KimpItem from './KimpItem';
 jest.mock('@/shared/hooks/useExchangeRate');
 
 describe('KimpItem', () => {
-  const coin = {
-    ticker: 'BTC',
-    koreaPrice: 2946000,
-    foreignPrice: 21374.5,
-  };
-  const exchangeRate = 1338.5;
+  const TICKER = 'BTC';
+  const KOREA_PRICE = 2946000;
+  const FOREIGN_PRICE = 21374.5;
+  const EXCHANGE_RATE = 1338.5;
 
-  beforeEach(() => {
-    (useExchangeRate as jest.Mock).mockReturnValue({ data: exchangeRate });
+  beforeAll(() => {
+    (useExchangeRate as jest.Mock).mockReturnValue({ data: EXCHANGE_RATE });
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  const renderKimpItem = () => renderWithClient((
-    <table>
-      <tbody>
-        <KimpItem coin={coin} />
-      </tbody>
-    </table>
-  ));
+  const renderKimpItem = ({
+    koreaPrice,
+    foreignPrice,
+  }: {
+    koreaPrice?: number;
+    foreignPrice?: number;
+  }) => {
+    const coin = {
+      ticker: TICKER,
+      koreaPrice,
+      foreignPrice,
+    };
+
+    return renderWithClient((
+      <table>
+        <tbody>
+          <KimpItem coin={coin} />
+        </tbody>
+      </table>
+    ));
+  };
 
   it('renders ticker', () => {
-    const { container } = renderKimpItem();
+    const { container } = renderKimpItem({});
 
-    expect(container).toHaveTextContent(coin.ticker);
+    expect(container).toHaveTextContent(TICKER);
   });
 
-  it('renders korea price', () => {
-    const { container } = renderKimpItem();
-
-    expect(container).toHaveTextContent(coin.koreaPrice.toLocaleString());
-  });
-
-  it('renders foreign price', () => {
-    const { container } = renderKimpItem();
-
-    expect(container).toHaveTextContent(coin.foreignPrice.toLocaleString());
-  });
-
-  it('renders price difference', () => {
-    const { container } = renderKimpItem();
-
-    const difference = coin.koreaPrice - (coin.foreignPrice * exchangeRate);
-
-    expect(container).toHaveTextContent(difference.toLocaleString());
-  });
-
-  it('renders kimchi premium', () => {
-    const { container } = renderKimpItem();
-
-    const premium = calculatePremium({
-      koreaPrice: coin.koreaPrice,
-      foreignPrice: coin.foreignPrice,
-      exchangeRate,
+  context('with korea price', () => {
+    const renderKimpItemWithKoreaPrice = () => renderKimpItem({
+      koreaPrice: KOREA_PRICE,
     });
 
-    expect(container).toHaveTextContent(`${premium}%`);
+    it('renders korea price', () => {
+      const { container } = renderKimpItemWithKoreaPrice();
+
+      expect(container).toHaveTextContent(KOREA_PRICE.toLocaleString());
+    });
+  });
+
+  context('with foreign price', () => {
+    const renderKimpItemWithForeignPrice = () => renderKimpItem({
+      foreignPrice: FOREIGN_PRICE,
+    });
+
+    it('renders foreign price', () => {
+      const { container } = renderKimpItemWithForeignPrice();
+
+      expect(container).toHaveTextContent(FOREIGN_PRICE.toLocaleString());
+    });
+  });
+
+  context('with both prices', () => {
+    const renderKimpItemWithBothPrices = () => renderKimpItem({
+      koreaPrice: KOREA_PRICE,
+      foreignPrice: FOREIGN_PRICE,
+    });
+
+    it('renders price difference', () => {
+      const { container } = renderKimpItemWithBothPrices();
+
+      const difference = KOREA_PRICE - (FOREIGN_PRICE * EXCHANGE_RATE);
+
+      expect(container).toHaveTextContent(difference.toLocaleString());
+    });
+
+    it('renders kimchi premium', () => {
+      const { container } = renderKimpItemWithBothPrices();
+
+      const premium = calculatePremium({
+        koreaPrice: KOREA_PRICE,
+        foreignPrice: FOREIGN_PRICE,
+        exchangeRate: EXCHANGE_RATE,
+      });
+
+      expect(container).toHaveTextContent(`${premium}%`);
+    });
   });
 });
