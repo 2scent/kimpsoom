@@ -4,7 +4,7 @@ import mockConsole, { RestoreConsole } from 'jest-mock-console';
 
 import TICKERS from '@fixtures/tickers';
 
-import { renderWithClient } from '@/shared/utils/testing/react-query';
+import { renderWithClient } from '@/shared/utils/react-query-testing';
 
 import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 

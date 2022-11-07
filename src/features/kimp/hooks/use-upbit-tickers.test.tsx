@@ -2,7 +2,7 @@ import { waitFor } from '@testing-library/react';
 
 import TICKERS from '@fixtures/tickers';
 
-import { renderHookWithClient } from '@/shared/utils/testing/react-query';
+import { renderHookWithClient } from '@/shared/utils/react-query-testing';
 
 import fetchUpbitTickers from '../api/fetch-upbit-tickers';
 

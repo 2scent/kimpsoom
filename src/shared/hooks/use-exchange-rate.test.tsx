@@ -1,6 +1,6 @@
 import { waitFor } from '@testing-library/react';
 
-import { renderHookWithClient } from '../utils/testing/react-query';
+import { renderHookWithClient } from '../utils/react-query-testing';
 
 import fetchExchangeRate from '../api/fetch-exchange-rate';
 

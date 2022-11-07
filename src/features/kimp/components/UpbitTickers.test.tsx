@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import TICKERS from '@fixtures/tickers';
 
-import { renderWithClient } from '@/shared/utils/testing/react-query';
+import { renderWithClient } from '@/shared/utils/react-query-testing';
 
 import { toggleSelectCoin } from '@/shared/store/coins-slice';
 
