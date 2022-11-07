@@ -4,7 +4,7 @@ import useWebSocket from 'react-use-websocket';
 
 import useThrottle from '@/shared/hooks/useThrottle';
 
-import { changeKoreaPrice } from '@/shared/store/coinsSlice';
+import { changeKoreanPrice } from '@/shared/store/coinsSlice';
 
 export default function useConnectUpbit(tickers: string[]) {
   const dispatch = useDispatch();
@@ -30,9 +30,9 @@ export default function useConnectUpbit(tickers: string[]) {
       throttle(
         ticker,
         () => dispatch(
-          changeKoreaPrice({
+          changeKoreanPrice({
             ticker,
-            koreaPrice: data.trade_price,
+            koreanPrice: data.trade_price,
           }),
         ),
       );

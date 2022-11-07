@@ -14,7 +14,7 @@ import {
   Coin,
   foreignPriceComparator,
   kimpComparator,
-  koreaPriceComparator,
+  koreanPriceComparator,
   tickerCompartor,
 } from '../utils/comparators';
 
@@ -37,10 +37,10 @@ const columns: SortableColumn<Coin>[] = [
     comparator: foreignPriceComparator,
   },
   {
-    id: 'koreaPrice',
+    id: 'koreanPrice',
     numeric: true,
     label: 'upbit (￦)',
-    comparator: koreaPriceComparator,
+    comparator: koreanPriceComparator,
   },
   {
     id: 'kimp',

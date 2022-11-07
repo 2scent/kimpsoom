@@ -1,25 +1,25 @@
 import calculatePremium from './calculatePremium';
 
 describe('calculatePremium', () => {
-  const koreaPrice = 2946000;
+  const koreanPrice = 2946000;
   const foreignPrice = 21374.5;
   const exchangeRate = 1338.5;
 
   context('with valid parameters', () => {
     it('returns premium(%)', () => {
       const premium = calculatePremium({
-        koreaPrice,
+        koreanPrice,
         foreignPrice,
         exchangeRate,
       });
 
       expect(premium).toBe(
-        ((koreaPrice / (foreignPrice * exchangeRate)) * 100 - 100).toFixed(2),
+        ((koreanPrice / (foreignPrice * exchangeRate)) * 100 - 100).toFixed(2),
       );
     });
   });
 
-  context('without koreaPrice', () => {
+  context('without koreanPrice', () => {
     it('returns empty string', () => {
       const premium = calculatePremium({
         foreignPrice,
@@ -33,7 +33,7 @@ describe('calculatePremium', () => {
   context('without foreignPrice', () => {
     it('returns empty string', () => {
       const premium = calculatePremium({
-        koreaPrice,
+        koreanPrice,
         exchangeRate,
       });
 
@@ -44,7 +44,7 @@ describe('calculatePremium', () => {
   context('without exchangeRate', () => {
     it('returns empty string', () => {
       const premium = calculatePremium({
-        koreaPrice,
+        koreanPrice,
         foreignPrice,
       });
 

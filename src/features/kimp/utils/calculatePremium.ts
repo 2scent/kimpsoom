@@ -1,15 +1,15 @@
 type CalculatePremiumParams = {
-  readonly koreaPrice?: number;
+  readonly koreanPrice?: number;
   readonly foreignPrice?: number;
   readonly exchangeRate?: number;
 };
 
 export default function calculatePremium({
-  koreaPrice,
+  koreanPrice,
   foreignPrice,
   exchangeRate,
 }: CalculatePremiumParams): string {
-  if (!koreaPrice || !foreignPrice || !exchangeRate) return '';
+  if (!koreanPrice || !foreignPrice || !exchangeRate) return '';
 
-  return ((koreaPrice / (foreignPrice * exchangeRate)) * 100 - 100).toFixed(2);
+  return ((koreanPrice / (foreignPrice * exchangeRate)) * 100 - 100).toFixed(2);
 }

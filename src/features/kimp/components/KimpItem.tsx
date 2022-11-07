@@ -10,28 +10,28 @@ import calculatePremium from '../utils/calculatePremium';
 interface KimpItemProps {
   coin: {
     ticker: string;
-    koreaPrice?: number;
+    koreanPrice?: number;
     foreignPrice?: number;
   };
 }
 
-function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }: KimpItemProps) {
+function KimpItem({ coin: { ticker, koreanPrice, foreignPrice } }: KimpItemProps) {
   const { data: exchangeRate } = useExchangeRate();
 
   const priceDiffernce = useMemo(
     () => {
-      if (!koreaPrice || !foreignPrice || !exchangeRate) return null;
-      return koreaPrice - (foreignPrice * exchangeRate);
+      if (!koreanPrice || !foreignPrice || !exchangeRate) return null;
+      return koreanPrice - (foreignPrice * exchangeRate);
     },
-    [koreaPrice, foreignPrice, exchangeRate],
+    [koreanPrice, foreignPrice, exchangeRate],
   );
 
   const kimchiPremium = useMemo(
     () => {
-      if (!koreaPrice || !foreignPrice || !exchangeRate) return null;
-      return calculatePremium({ koreaPrice, foreignPrice, exchangeRate });
+      if (!koreanPrice || !foreignPrice || !exchangeRate) return null;
+      return calculatePremium({ koreanPrice, foreignPrice, exchangeRate });
     },
-    [koreaPrice, foreignPrice, exchangeRate],
+    [koreanPrice, foreignPrice, exchangeRate],
   );
 
   return (
@@ -41,7 +41,7 @@ function KimpItem({ coin: { ticker, koreaPrice, foreignPrice } }: KimpItemProps)
         {foreignPrice && foreignPrice.toLocaleString()}
       </StyledTableCell>
       <StyledTableCell align="right">
-        {koreaPrice && koreaPrice.toLocaleString()}
+        {koreanPrice && koreanPrice.toLocaleString()}
       </StyledTableCell>
       <StyledTableCell align="right">
         {priceDiffernce && `${priceDiffernce.toLocaleString()}`}

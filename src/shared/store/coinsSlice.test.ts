@@ -4,7 +4,7 @@ import { RootState } from './index';
 
 import reducer, {
   changeForeignPrice,
-  changeKoreaPrice,
+  changeKoreanPrice,
   coinsSelector,
   initCoins,
   selectCoins,
@@ -38,7 +38,7 @@ describe('coinsSlice', () => {
         expect(state.coins).toEqual(
           TICKERS.map((ticker) => ({
             ticker,
-            koreaPrice: null,
+            koreanPrice: null,
             foreignPrice: null,
             selected: false,
           })),
@@ -117,28 +117,28 @@ describe('coinsSlice', () => {
       });
     });
 
-    describe('changeKoreaPrice', () => {
+    describe('changeKoreanPrice', () => {
       const initialState = {
         coins: [
-          { ticker: 'BTC', koreaPrice: 0.0 },
-          { ticker: 'ETH', koreaPrice: 0.0 },
-          { ticker: 'XRP', koreaPrice: 0.0 },
-          { ticker: 'ADA', koreaPrice: 0.0 },
+          { ticker: 'BTC', koreanPrice: 0.0 },
+          { ticker: 'ETH', koreanPrice: 0.0 },
+          { ticker: 'XRP', koreanPrice: 0.0 },
+          { ticker: 'ADA', koreanPrice: 0.0 },
         ],
       };
 
-      it('changes korea price of coin', () => {
+      it('changes korean price of coin', () => {
         const ticker = 'BTC';
-        const koreaPrice = 27359000;
+        const koreanPrice = 27359000;
 
         const state = reducer(
           initialState,
-          changeKoreaPrice({ ticker, koreaPrice }),
+          changeKoreanPrice({ ticker, koreanPrice }),
         );
 
         const btc = state.coins.find((coin) => coin.ticker === ticker)!;
 
-        expect(btc.koreaPrice).toBe(koreaPrice);
+        expect(btc.koreanPrice).toBe(koreanPrice);
       });
     });
 

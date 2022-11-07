@@ -1,6 +1,6 @@
 export interface Coin {
   ticker: string;
-  koreaPrice?: number;
+  koreanPrice?: number;
   foreignPrice?: number;
   kimp?: unknown;
 }
@@ -15,11 +15,11 @@ export function tickerCompartor(firstCoin: Coin, secondCoin: Coin) {
   return 0;
 }
 
-export function koreaPriceComparator(firstCoin: Coin, secondCoin: Coin) {
-  const firstKoreaPrice = firstCoin.koreaPrice ?? 0;
-  const secondKoreaPrice = secondCoin.koreaPrice ?? 0;
+export function koreanPriceComparator(firstCoin: Coin, secondCoin: Coin) {
+  const firstKoreanPrice = firstCoin.koreanPrice ?? 0;
+  const secondKoreanPrice = secondCoin.koreanPrice ?? 0;
 
-  return firstKoreaPrice - secondKoreaPrice;
+  return firstKoreanPrice - secondKoreanPrice;
 }
 
 export function foreignPriceComparator(firstCoin: Coin, secondCoin: Coin) {
@@ -29,14 +29,14 @@ export function foreignPriceComparator(firstCoin: Coin, secondCoin: Coin) {
   return firstForeignPrice - secondForeignPrice;
 }
 
-function calculateRate(koreaPrice?: number, foreignPrice?: number) {
-  if (!koreaPrice || !foreignPrice) return 0;
-  return koreaPrice / foreignPrice;
+function calculateRate(koreanPrice?: number, foreignPrice?: number) {
+  if (!koreanPrice || !foreignPrice) return 0;
+  return koreanPrice / foreignPrice;
 }
 
 export function kimpComparator(firstCoin: Coin, secondCoin: Coin) {
-  const firstRate = calculateRate(firstCoin.koreaPrice, firstCoin.foreignPrice);
-  const secondRate = calculateRate(secondCoin.koreaPrice, secondCoin.foreignPrice);
+  const firstRate = calculateRate(firstCoin.koreanPrice, firstCoin.foreignPrice);
+  const secondRate = calculateRate(secondCoin.koreanPrice, secondCoin.foreignPrice);
 
   return firstRate - secondRate;
 }

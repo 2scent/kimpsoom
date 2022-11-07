@@ -4,7 +4,7 @@ import { RootState } from './index';
 
 type SelectableCoin = {
   readonly ticker: string;
-  readonly koreaPrice?: number;
+  readonly koreanPrice?: number;
   readonly foreignPrice?: number;
   readonly selected?: boolean;
 };
@@ -26,7 +26,7 @@ const { reducer, actions } = createSlice({
         ...state,
         coins: tickers.map((ticker: Ticker) => ({
           ticker,
-          koreaPrice: null,
+          koreanPrice: null,
           foreignPrice: null,
           selected: false,
         })),
@@ -59,14 +59,14 @@ const { reducer, actions } = createSlice({
       };
     },
 
-    changeKoreaPrice(state, { payload: { ticker, koreaPrice } }) {
+    changeKoreanPrice(state, { payload: { ticker, koreanPrice } }) {
       const { coins } = state;
 
       return {
         ...state,
         coins: coins.map((
           (coin) => (coin.ticker === ticker
-            ? { ...coin, koreaPrice }
+            ? { ...coin, koreanPrice }
             : coin)
         )),
       };
@@ -91,7 +91,7 @@ export const {
   initCoins,
   selectCoins,
   toggleSelectCoin,
-  changeKoreaPrice,
+  changeKoreanPrice,
   changeForeignPrice,
 } = actions;
 

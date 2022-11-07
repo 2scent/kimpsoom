@@ -10,7 +10,7 @@ jest.mock('@/shared/hooks/useExchangeRate');
 
 describe('KimpItem', () => {
   const TICKER = 'BTC';
-  const KOREA_PRICE = 2946000;
+  const KOREAN_PRICE = 2946000;
   const FOREIGN_PRICE = 21374.5;
   const EXCHANGE_RATE = 1338.5;
 
@@ -23,15 +23,15 @@ describe('KimpItem', () => {
   });
 
   const renderKimpItem = ({
-    koreaPrice,
+    koreanPrice,
     foreignPrice,
   }: {
-    koreaPrice?: number;
+    koreanPrice?: number;
     foreignPrice?: number;
   }) => {
     const coin = {
       ticker: TICKER,
-      koreaPrice,
+      koreanPrice,
       foreignPrice,
     };
 
@@ -50,15 +50,15 @@ describe('KimpItem', () => {
     expect(container).toHaveTextContent(TICKER);
   });
 
-  context('with korea price', () => {
-    const renderKimpItemWithKoreaPrice = () => renderKimpItem({
-      koreaPrice: KOREA_PRICE,
+  context('with korean price', () => {
+    const renderKimpItemWithKoreanPrice = () => renderKimpItem({
+      koreanPrice: KOREAN_PRICE,
     });
 
-    it('renders korea price', () => {
-      const { container } = renderKimpItemWithKoreaPrice();
+    it('renders korean price', () => {
+      const { container } = renderKimpItemWithKoreanPrice();
 
-      expect(container).toHaveTextContent(KOREA_PRICE.toLocaleString());
+      expect(container).toHaveTextContent(KOREAN_PRICE.toLocaleString());
     });
   });
 
@@ -76,14 +76,14 @@ describe('KimpItem', () => {
 
   context('with both prices', () => {
     const renderKimpItemWithBothPrices = () => renderKimpItem({
-      koreaPrice: KOREA_PRICE,
+      koreanPrice: KOREAN_PRICE,
       foreignPrice: FOREIGN_PRICE,
     });
 
     it('renders price difference', () => {
       const { container } = renderKimpItemWithBothPrices();
 
-      const difference = KOREA_PRICE - (FOREIGN_PRICE * EXCHANGE_RATE);
+      const difference = KOREAN_PRICE - (FOREIGN_PRICE * EXCHANGE_RATE);
 
       expect(container).toHaveTextContent(difference.toLocaleString());
     });
@@ -92,7 +92,7 @@ describe('KimpItem', () => {
       const { container } = renderKimpItemWithBothPrices();
 
       const premium = calculatePremium({
-        koreaPrice: KOREA_PRICE,
+        koreanPrice: KOREAN_PRICE,
         foreignPrice: FOREIGN_PRICE,
         exchangeRate: EXCHANGE_RATE,
       });

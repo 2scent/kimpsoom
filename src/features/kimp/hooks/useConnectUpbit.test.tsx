@@ -4,7 +4,7 @@ import WS from 'jest-websocket-mock';
 
 import { useDispatch } from 'react-redux';
 
-import { changeKoreaPrice } from '@/shared/store/coinsSlice';
+import { changeKoreanPrice } from '@/shared/store/coinsSlice';
 
 import useConnectUpbit from './useConnectUpbit';
 
@@ -72,9 +72,9 @@ describe('useConnectUpbit', () => {
 
       await waitFor((
         () => expect(dispatch).toBeCalledWith(
-          changeKoreaPrice({
+          changeKoreanPrice({
             ticker: message.code.split('-')[1],
-            koreaPrice: message.trade_price,
+            koreanPrice: message.trade_price,
           }),
         )
       ));

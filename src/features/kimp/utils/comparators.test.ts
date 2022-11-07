@@ -1,7 +1,7 @@
 import {
   foreignPriceComparator,
   kimpComparator,
-  koreaPriceComparator,
+  koreanPriceComparator,
   tickerCompartor,
 } from './comparators';
 
@@ -41,54 +41,54 @@ describe('comparators', () => {
     });
   });
 
-  describe('koreaPriceComparator', () => {
-    context('when both coins have korea price', () => {
+  describe('koreanPriceComparator', () => {
+    context('when both coins have korean price', () => {
       const firstCoin = {
         ticker: 'BTC',
-        koreaPrice: 20000,
+        koreanPrice: 20000,
       };
 
       const secondCoin = {
         ticker: 'ETH',
-        koreaPrice: 10000,
+        koreanPrice: 10000,
       };
 
-      it('returns korea price difference between two coins', () => {
-        const result = koreaPriceComparator(firstCoin, secondCoin);
+      it('returns korean price difference between two coins', () => {
+        const result = koreanPriceComparator(firstCoin, secondCoin);
 
         expect(result).toBeGreaterThan(0);
       });
     });
 
-    context("when first coin doesn't have korea price", () => {
+    context("when first coin doesn't have korean price", () => {
       const firstCoin = {
         ticker: 'BTC',
       };
 
       const secondCoin = {
         ticker: 'ETH',
-        koreaPrice: 10000,
+        koreanPrice: 10000,
       };
 
-      it('assumes korea price of first coin is zero.', () => {
-        const result = koreaPriceComparator(firstCoin, secondCoin);
+      it('assumes korean price of first coin is zero.', () => {
+        const result = koreanPriceComparator(firstCoin, secondCoin);
 
         expect(result).toBe(-10000);
       });
     });
 
-    context("when second coin doesn't have korea price", () => {
+    context("when second coin doesn't have korean price", () => {
       const firstCoin = {
         ticker: 'BTC',
-        koreaPrice: 20000,
+        koreanPrice: 20000,
       };
 
       const secondCoin = {
         ticker: 'ETH',
       };
 
-      it('assumes korea price of second coin is zero.', () => {
-        const result = koreaPriceComparator(firstCoin, secondCoin);
+      it('assumes korean price of second coin is zero.', () => {
+        const result = koreanPriceComparator(firstCoin, secondCoin);
 
         expect(result).toBe(20000);
       });
@@ -150,34 +150,34 @@ describe('comparators', () => {
   });
 
   describe('kimpComparator', () => {
-    context('when both coins have korea price and foreign price', () => {
+    context('when both coins have korean price and foreign price', () => {
       const firstCoin = {
         ticker: 'BTC',
-        koreaPrice: 20000,
+        koreanPrice: 20000,
         foreignPrice: 2500,
       };
 
       const secondCoin = {
         ticker: 'ETH',
-        koreaPrice: 10000,
+        koreanPrice: 10000,
         foreignPrice: 1000,
       };
 
-      it('returns rate (korea price / foreign price) difference between two coins', () => {
+      it('returns rate (korean price / foreign price) difference between two coins', () => {
         const result = kimpComparator(firstCoin, secondCoin);
 
         expect(result).toBe(-2);
       });
     });
 
-    context("when first coin doesn't have korea price or foreign price", () => {
+    context("when first coin doesn't have korean price or foreign price", () => {
       const firstCoin = {
         ticker: 'BTC',
       };
 
       const secondCoin = {
         ticker: 'ETH',
-        koreaPrice: 10000,
+        koreanPrice: 10000,
         foreignPrice: 1000,
       };
 
@@ -188,10 +188,10 @@ describe('comparators', () => {
       });
     });
 
-    context("when second coin doesn't have korea price or foreign price", () => {
+    context("when second coin doesn't have korean price or foreign price", () => {
       const firstCoin = {
         ticker: 'BTC',
-        koreaPrice: 20000,
+        koreanPrice: 20000,
         foreignPrice: 2500,
       };
 
