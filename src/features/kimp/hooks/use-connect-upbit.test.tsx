@@ -4,9 +4,9 @@ import WS from 'jest-websocket-mock';
 
 import { useDispatch } from 'react-redux';
 
-import { changeKoreanPrice } from '@/shared/store/coinsSlice';
+import { changeKoreanPrice } from '@/shared/store/coins-slice';
 
-import useConnectUpbit from './useConnectUpbit';
+import useConnectUpbit from './use-connect-upbit';
 
 jest.mock('@tanstack/react-query');
 

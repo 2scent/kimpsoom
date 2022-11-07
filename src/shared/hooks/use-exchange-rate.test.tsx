@@ -2,11 +2,11 @@ import { waitFor } from '@testing-library/react';
 
 import { renderHookWithClient } from '../utils/testing/react-query';
 
-import fetchExchangeRate from '../api/fetchExchangeRate';
+import fetchExchangeRate from '../api/fetch-exchange-rate';
 
-import useExchangeRate from './useExchangeRate';
+import useExchangeRate from './use-exchange-rate';
 
-jest.mock('../api/fetchExchangeRate');
+jest.mock('../api/fetch-exchange-rate');
 
 describe('useExchangeRate', () => {
   const exchangeRate = 1312.00;

@@ -2,9 +2,9 @@ import { useDispatch } from 'react-redux';
 
 import useWebSocket from 'react-use-websocket';
 
-import useThrottle from '@/shared/hooks/useThrottle';
+import useThrottle from '@/shared/hooks/use-throttle';
 
-import { changeForeignPrice } from '@/shared/store/coinsSlice';
+import { changeForeignPrice } from '@/shared/store/coins-slice';
 
 export default function useConnectBybit(tickers: string[]) {
   const dispatch = useDispatch();

@@ -3,9 +3,9 @@ import React, { useMemo } from 'react';
 import StyledTableRow from '@/shared/components/StyledTableRow';
 import StyledTableCell from '@/shared/components/StyledTableCell';
 
-import useExchangeRate from '@/shared/hooks/useExchangeRate';
+import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
-import calculatePremium from '../utils/calculatePremium';
+import calculatePremium from '../utils/calculate-premium';
 
 interface KimpItemProps {
   coin: {

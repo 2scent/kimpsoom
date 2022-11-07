@@ -1,10 +1,10 @@
 import { renderWithClient } from '@/shared/utils/testing/react-query';
 
-import useExchangeRate from '@/shared/hooks/useExchangeRate';
+import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
 import ExchangeRate from './ExchangeRate';
 
-jest.mock('@/shared/hooks/useExchangeRate');
+jest.mock('@/shared/hooks/use-exchange-rate');
 
 describe('ExchangeRate', () => {
   const exchangeRate = 1312.00;

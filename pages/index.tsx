@@ -2,7 +2,7 @@ import { Container } from '@mui/material';
 
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-import fetchExchangeRate from '@/shared/api/fetchExchangeRate';
+import fetchExchangeRate from '@/shared/api/fetch-exchange-rate';
 
 import { ExchangeRateContainer } from '@/features/exchange-rate';
 import { KimpContainer, UpbitTickersContainer } from '@/features/kimp';

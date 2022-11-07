@@ -4,16 +4,16 @@ import TICKERS from '@fixtures/tickers';
 
 import { renderWithClient } from '@/shared/utils/testing/react-query';
 
-import useExchangeRate from '@/shared/hooks/useExchangeRate';
+import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
-import useUpbitTickers from '../hooks/useUpbitTickers';
+import useUpbitTickers from '../hooks/use-upbit-tickers';
 
 import KimpListContainer from './KimpListContainer';
 
-jest.mock('@/shared/hooks/useExchangeRate');
-jest.mock('../hooks/useConnectBybit');
-jest.mock('../hooks/useConnectUpbit');
-jest.mock('../hooks/useUpbitTickers');
+jest.mock('@/shared/hooks/use-exchange-rate');
+jest.mock('../hooks/use-connect-bybit');
+jest.mock('../hooks/use-connect-upbit');
+jest.mock('../hooks/use-upbit-tickers');
 
 describe('KimpListContainer', () => {
   const dispatch = jest.fn();

@@ -4,18 +4,18 @@ import TICKERS from '@fixtures/tickers';
 
 import { renderWithClient } from '@/shared/utils/testing/react-query';
 
-import useExchangeRate from '@/shared/hooks/useExchangeRate';
+import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
-import { initCoins, selectCoins } from '@/shared/store/coinsSlice';
+import { initCoins, selectCoins } from '@/shared/store/coins-slice';
 
-import useConnectBybit from '../hooks/useConnectBybit';
-import useConnectUpbit from '../hooks/useConnectUpbit';
+import useConnectBybit from '../hooks/use-connect-bybit';
+import useConnectUpbit from '../hooks/use-connect-upbit';
 
 import KimpList, { defaultSelectedTickers } from './KimpList';
 
-jest.mock('@/shared/hooks/useExchangeRate');
-jest.mock('../hooks/useConnectBybit');
-jest.mock('../hooks/useConnectUpbit');
+jest.mock('@/shared/hooks/use-exchange-rate');
+jest.mock('../hooks/use-connect-bybit');
+jest.mock('../hooks/use-connect-upbit');
 
 describe('KimpList', () => {
   const dispatch = jest.fn();

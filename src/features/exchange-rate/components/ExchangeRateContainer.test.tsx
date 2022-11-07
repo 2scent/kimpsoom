@@ -2,11 +2,11 @@ import mockConsole, { RestoreConsole } from 'jest-mock-console';
 
 import { renderWithClient } from '@/shared/utils/testing/react-query';
 
-import useExchangeRate from '@/shared/hooks/useExchangeRate';
+import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
 import ExchangeRateContainer from './ExchangeRateContainer';
 
-jest.mock('@/shared/hooks/useExchangeRate');
+jest.mock('@/shared/hooks/use-exchange-rate');
 
 describe('ExchangeRateContainer', () => {
   const exchangeRate = 1312.00;

@@ -4,11 +4,11 @@ import TICKERS from '@fixtures/tickers';
 
 import { renderHookWithClient } from '@/shared/utils/testing/react-query';
 
-import fetchUpbitTickers from '../api/fetchUpbitTickers';
+import fetchUpbitTickers from '../api/fetch-upbit-tickers';
 
-import useUpbitTickers from './useUpbitTickers';
+import useUpbitTickers from './use-upbit-tickers';
 
-jest.mock('../api/fetchUpbitTickers');
+jest.mock('../api/fetch-upbit-tickers');
 
 describe('useUpbitTickers', () => {
   beforeAll(() => {

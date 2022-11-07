@@ -1,4 +1,4 @@
-import fetchExchangeRate from './fetchExchangeRate';
+import fetchExchangeRate from './fetch-exchange-rate';
 
 describe('fetchExchangeRate', () => {
   it('returns exchange rate', async () => {

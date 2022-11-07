@@ -1,12 +1,12 @@
 import { renderWithClient } from '@/shared/utils/testing/react-query';
 
-import useExchangeRate from '@/shared/hooks/useExchangeRate';
+import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
-import calculatePremium from '../utils/calculatePremium';
+import calculatePremium from '../utils/calculate-premium';
 
 import KimpItem from './KimpItem';
 
-jest.mock('@/shared/hooks/useExchangeRate');
+jest.mock('@/shared/hooks/use-exchange-rate');
 
 describe('KimpItem', () => {
   const TICKER = 'BTC';

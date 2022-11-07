@@ -1,4 +1,4 @@
-import calculatePremium from './calculatePremium';
+import calculatePremium from './calculate-premium';
 
 describe('calculatePremium', () => {
   const koreanPrice = 2946000;

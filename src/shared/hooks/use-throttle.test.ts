@@ -1,6 +1,6 @@
 import { renderHook } from '@testing-library/react';
 
-import useThrottle from './useThrottle';
+import useThrottle from './use-throttle';
 
 jest.useFakeTimers();
 

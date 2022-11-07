@@ -6,7 +6,7 @@ import {
   initCoins,
   selectCoins,
   selectedCoinsSelector,
-} from '@/shared/store/coinsSlice';
+} from '@/shared/store/coins-slice';
 
 import SortableTable, { SortableColumn } from '@/shared/components/SortableTable';
 
@@ -18,8 +18,8 @@ import {
   tickerCompartor,
 } from '../utils/comparators';
 
-import useConnectBybit from '../hooks/useConnectBybit';
-import useConnectUpbit from '../hooks/useConnectUpbit';
+import useConnectBybit from '../hooks/use-connect-bybit';
+import useConnectUpbit from '../hooks/use-connect-upbit';
 
 import KimpItem from './KimpItem';
 

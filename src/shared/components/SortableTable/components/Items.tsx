@@ -2,7 +2,7 @@ import { TableBody } from '@mui/material';
 
 import stableSort from '@/shared/utils/sort/stable-sort';
 
-import { useSortableTableContext } from '../useSortableTableContext';
+import { useSortableTableContext } from '../use-sortable-table-context';
 
 import { getComparator } from '../utils';
 

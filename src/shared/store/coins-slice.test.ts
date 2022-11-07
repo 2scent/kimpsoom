@@ -11,7 +11,7 @@ import reducer, {
   selectedCoinsSelector,
   selectedTickersSelector,
   toggleSelectCoin,
-} from './coinsSlice';
+} from './coins-slice';
 
 describe('coinsSlice', () => {
   describe('reducer', () => {

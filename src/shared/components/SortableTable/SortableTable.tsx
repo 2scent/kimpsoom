@@ -6,7 +6,7 @@ import {
   Paper,
 } from '@mui/material';
 
-import { SortableTableProvider } from './useSortableTableContext';
+import { SortableTableProvider } from './use-sortable-table-context';
 
 import { Order, OrderBy, SortableColumn } from './utils';
 

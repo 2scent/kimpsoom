@@ -4,7 +4,7 @@ import StyledTableRow from '@/shared/components/StyledTableRow';
 import StyledTableCell from '@/shared/components/StyledTableCell';
 import StyledTableSortLabel from '@/shared/components/StyledTableSortLabel';
 
-import { useSortableTableContext } from '../useSortableTableContext';
+import { useSortableTableContext } from '../use-sortable-table-context';
 
 function Header() {
   const {

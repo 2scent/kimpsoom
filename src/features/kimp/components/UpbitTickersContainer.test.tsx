@@ -6,11 +6,11 @@ import mockConsole, { RestoreConsole } from 'jest-mock-console';
 
 import TICKERS from '@fixtures/tickers';
 
-import useUpbitTickers from '../hooks/useUpbitTickers';
+import useUpbitTickers from '../hooks/use-upbit-tickers';
 
 import UpbitTickersContainer from './UpbitTickersContainer';
 
-jest.mock('../hooks/useUpbitTickers');
+jest.mock('../hooks/use-upbit-tickers');
 
 describe('UpbitTickersContainer', () => {
   const dispatch = jest.fn();

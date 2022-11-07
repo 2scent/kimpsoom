@@ -1,10 +1,10 @@
 import { fireEvent, render } from '@testing-library/react';
 
-import { useSortableTableContext } from '../useSortableTableContext';
+import { useSortableTableContext } from '../use-sortable-table-context';
 
 import Header from './Header';
 
-jest.mock('../useSortableTableContext');
+jest.mock('../use-sortable-table-context');
 
 describe('SortableTable.Header', () => {
   const columns = [

@@ -6,13 +6,13 @@ import TICKERS from '@fixtures/tickers';
 
 import { renderWithClient } from '@/shared/utils/testing/react-query';
 
-import { toggleSelectCoin } from '@/shared/store/coinsSlice';
+import { toggleSelectCoin } from '@/shared/store/coins-slice';
 
-import useUpbitTickers from '../hooks/useUpbitTickers';
+import useUpbitTickers from '../hooks/use-upbit-tickers';
 
 import UpbitTickersContainer from './UpbitTickersContainer';
 
-jest.mock('../hooks/useUpbitTickers');
+jest.mock('../hooks/use-upbit-tickers');
 
 describe('UpbitTickersContainer', () => {
   const dispatch = jest.fn();

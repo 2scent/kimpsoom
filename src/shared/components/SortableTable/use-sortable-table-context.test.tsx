@@ -4,7 +4,7 @@ import {
   SortableTableContext,
   SortableTableProvider,
   useSortableTableContext,
-} from './useSortableTableContext';
+} from './use-sortable-table-context';
 
 describe('useSortableTableContext', () => {
   context('with SortableTableProvider', () => {

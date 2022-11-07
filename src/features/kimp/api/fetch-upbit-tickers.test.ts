@@ -1,4 +1,4 @@
-import fetchUpbitTickers from './fetchUpbitTickers';
+import fetchUpbitTickers from './fetch-upbit-tickers';
 
 describe('fetchUpbitTickers', () => {
   it('returns upbit coins', async () => {

@@ -1,4 +1,4 @@
-import useUpbitTickers from '../hooks/useUpbitTickers';
+import useUpbitTickers from '../hooks/use-upbit-tickers';
 
 import KimpList from './KimpList';
 
