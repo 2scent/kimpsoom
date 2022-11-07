@@ -35,5 +35,5 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "src/features/kimp/utils/calculate-kimp.ts", "src/features/kimp/utils/calculate-kimpts"  ]
 }

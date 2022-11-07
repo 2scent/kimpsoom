@@ -1,14 +1,14 @@
-interface CalculatePremiumParams {
+interface CalculateKimpParams {
   readonly koreanPrice?: number;
   readonly foreignPrice?: number;
   readonly exchangeRate?: number;
 }
 
-export default function calculatePremium({
+export default function calculateKimp({
   koreanPrice,
   foreignPrice,
   exchangeRate,
-}: CalculatePremiumParams): string {
+}: CalculateKimpParams): string {
   if (!koreanPrice || !foreignPrice || !exchangeRate) return '';
 
   return ((koreanPrice / (foreignPrice * exchangeRate)) * 100 - 100).toFixed(2);

@@ -2,7 +2,7 @@ import { renderWithClient } from '@/shared/utils/react-query-testing';
 
 import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
-import calculatePremium from '../utils/calculate-premium';
+import calculateKimp from '../utils/calculate-kimp.ts';
 
 import KimpItem from './KimpItem';
 
@@ -91,7 +91,7 @@ describe('KimpItem', () => {
     it('renders kimchi premium', () => {
       const { container } = renderKimpItemWithBothPrices();
 
-      const premium = calculatePremium({
+      const premium = calculateKimp({
         koreanPrice: KOREAN_PRICE,
         foreignPrice: FOREIGN_PRICE,
         exchangeRate: EXCHANGE_RATE,

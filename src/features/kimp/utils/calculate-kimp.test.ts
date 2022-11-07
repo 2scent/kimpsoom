@@ -1,13 +1,13 @@
-import calculatePremium from './calculate-premium';
+import calculateKimp from './calculate-kimp';
 
-describe('calculatePremium', () => {
+describe('calculateKimp', () => {
   const koreanPrice = 2946000;
   const foreignPrice = 21374.5;
   const exchangeRate = 1338.5;
 
   context('with valid parameters', () => {
     it('returns premium(%)', () => {
-      const premium = calculatePremium({
+      const premium = calculateKimp({
         koreanPrice,
         foreignPrice,
         exchangeRate,
@@ -21,7 +21,7 @@ describe('calculatePremium', () => {
 
   context('without koreanPrice', () => {
     it('returns empty string', () => {
-      const premium = calculatePremium({
+      const premium = calculateKimp({
         foreignPrice,
         exchangeRate,
       });
@@ -32,7 +32,7 @@ describe('calculatePremium', () => {
 
   context('without foreignPrice', () => {
     it('returns empty string', () => {
-      const premium = calculatePremium({
+      const premium = calculateKimp({
         koreanPrice,
         exchangeRate,
       });
@@ -43,7 +43,7 @@ describe('calculatePremium', () => {
 
   context('without exchangeRate', () => {
     it('returns empty string', () => {
-      const premium = calculatePremium({
+      const premium = calculateKimp({
         koreanPrice,
         foreignPrice,
       });

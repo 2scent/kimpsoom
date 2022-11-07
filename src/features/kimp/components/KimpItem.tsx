@@ -5,7 +5,7 @@ import StyledTableCell from '@/shared/components/StyledTableCell';
 
 import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
-import calculatePremium from '../utils/calculate-premium';
+import calculateKimp from '../utils/calculate-kimp.ts';
 
 interface KimpItemProps {
   coin: {
@@ -29,7 +29,7 @@ function KimpItem({ coin: { ticker, koreanPrice, foreignPrice } }: KimpItemProps
   const kimchiPremium = useMemo(
     () => {
       if (!koreanPrice || !foreignPrice || !exchangeRate) return null;
-      return calculatePremium({ koreanPrice, foreignPrice, exchangeRate });
+      return calculateKimp({ koreanPrice, foreignPrice, exchangeRate });
     },
     [koreanPrice, foreignPrice, exchangeRate],
   );
