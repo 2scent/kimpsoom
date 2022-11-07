@@ -13,10 +13,10 @@ export interface SortableTableContext<T> {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const TableContext = createContext<SortableTableContext<any> | undefined>(undefined);
 
-type ProviderProps<T> = {
+interface ProviderProps<T> {
   children: React.ReactNode;
   value: SortableTableContext<T>;
-};
+}
 
 export function SortableTableProvider<T>({ children, value }: ProviderProps<T>) {
   return (

@@ -13,10 +13,10 @@ import { Order, OrderBy, SortableColumn } from './utils';
 import Header from './components/Header';
 import Items from './components/Items';
 
-type SortableTableProps<T> = {
+interface SortableTableProps<T> {
   columns: SortableColumn<T>[];
   children: ReactNode;
-};
+}
 
 function SortableTable<Data>({
   columns,

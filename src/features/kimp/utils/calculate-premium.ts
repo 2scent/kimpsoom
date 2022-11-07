@@ -1,8 +1,8 @@
-type CalculatePremiumParams = {
+interface CalculatePremiumParams {
   readonly koreanPrice?: number;
   readonly foreignPrice?: number;
   readonly exchangeRate?: number;
-};
+}
 
 export default function calculatePremium({
   koreanPrice,

@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { RootState } from './index';
 
-type SelectableCoin = {
+interface SelectableCoin {
   readonly ticker: string;
   readonly koreanPrice?: number;
   readonly foreignPrice?: number;
   readonly selected?: boolean;
-};
+}
 
 export interface CoinsState {
   readonly coins: SelectableCoin[];
