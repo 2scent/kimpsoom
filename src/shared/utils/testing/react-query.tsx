@@ -2,7 +2,7 @@ import React from 'react';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import { render } from '@testing-library/react';
+import { render, renderHook } from '@testing-library/react';
 
 const defaultOptions = {
   queries: {
@@ -11,20 +11,20 @@ const defaultOptions = {
   },
 };
 
-export function createWrapper() {
-  const queryClient = new QueryClient({
-    defaultOptions,
-  });
+export function renderHookWithClient<Result, Props>(renderFunc: (initialProps: Props) => Result) {
+  const queryClient = new QueryClient({ defaultOptions });
 
-  return function Wrapper({ children }: { children: React.ReactNode }) {
-    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
-  };
+  const wrapper = ({ children }: { children: React.ReactNode }) => (
+    <QueryClientProvider client={queryClient}>
+      {children}
+    </QueryClientProvider>
+  );
+
+  return renderHook(renderFunc, { wrapper });
 }
 
 export function renderWithClient(ui: React.ReactElement) {
-  const queryClient = new QueryClient({
-    defaultOptions,
-  });
+  const queryClient = new QueryClient({ defaultOptions });
 
   return render((
     <QueryClientProvider client={queryClient}>

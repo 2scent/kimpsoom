@@ -1,6 +1,6 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 
-import { createWrapper } from '../utils/testing/react-query';
+import { renderHookWithClient } from '../utils/testing/react-query';
 
 import fetchExchangeRate from '../api/fetchExchangeRate';
 
@@ -16,9 +16,7 @@ describe('useExchangeRate', () => {
   });
 
   it('returns exchange rate', async () => {
-    const { result } = renderHook(() => useExchangeRate(), {
-      wrapper: createWrapper(),
-    });
+    const { result } = renderHookWithClient(() => useExchangeRate());
 
     await waitFor((
       () => expect(result.current.data).toBe(exchangeRate)

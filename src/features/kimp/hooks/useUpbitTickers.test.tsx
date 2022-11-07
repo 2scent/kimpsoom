@@ -1,8 +1,8 @@
-import { renderHook, waitFor } from '@testing-library/react';
+import { waitFor } from '@testing-library/react';
 
 import TICKERS from '@fixtures/tickers';
 
-import { createWrapper } from '@/shared/utils/testing/react-query';
+import { renderHookWithClient } from '@/shared/utils/testing/react-query';
 
 import fetchUpbitTickers from '../api/fetchUpbitTickers';
 
@@ -16,9 +16,7 @@ describe('useUpbitTickers', () => {
   });
 
   it('returns upbit tickers', async () => {
-    const { result } = renderHook(() => useUpbitTickers(), {
-      wrapper: createWrapper(),
-    });
+    const { result } = renderHookWithClient(() => useUpbitTickers());
 
     await waitFor((
       () => expect(result.current.data).toEqual(TICKERS)
