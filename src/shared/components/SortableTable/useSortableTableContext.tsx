@@ -2,29 +2,29 @@ import { createContext, useContext } from 'react';
 
 import { SortableColumn, Order, OrderBy } from './utils';
 
-type ContextProps<T> = {
+export interface SortableTableContext<T> {
   columns: SortableColumn<T>[];
   order: Order;
   orderBy: OrderBy;
   setOrder: React.Dispatch<React.SetStateAction<Order>>;
   setOrderBy: React.Dispatch<React.SetStateAction<OrderBy>>
-};
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const TableContext = createContext<ContextProps<any> | undefined>(undefined);
+const TableContext = createContext<SortableTableContext<any> | undefined>(undefined);
 
 type ProviderProps<T> = {
   children: React.ReactNode;
-  value: ContextProps<T>;
+  value: SortableTableContext<T>;
 };
 
-function SortableTableProvider<T>({ children, value }: ProviderProps<T>) {
+export function SortableTableProvider<T>({ children, value }: ProviderProps<T>) {
   return (
     <TableContext.Provider value={value}>{children}</TableContext.Provider>
   );
 }
 
-function useSortableTableContext() {
+export function useSortableTableContext() {
   const context = useContext(TableContext);
 
   if (context === undefined) {
@@ -33,5 +33,3 @@ function useSortableTableContext() {
 
   return context;
 }
-
-export { SortableTableProvider, useSortableTableContext };
