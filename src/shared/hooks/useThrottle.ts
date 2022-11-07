@@ -6,13 +6,13 @@ interface Throttles {
   [key: string]: throttle<(func: () => void) => void>;
 }
 
-export default function useThrottle(delay: number) {
+export default function useThrottle(delayMs: number) {
   const throttles = useRef({} as Throttles);
 
   return (key: string, callback: () => void) => {
     if (!(key in throttles.current)) {
       throttles.current[key] = throttle(
-        delay,
+        delayMs,
         (func: () => void) => func(),
       );
     }
