@@ -2,7 +2,7 @@ import { renderWithClient } from '@/shared/utils/react-query-testing';
 
 import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
-import calculateKimp from '../utils/calculate-kimp.ts';
+import calculateKimp from '../utils/calculate-kimp';
 
 import KimpItem from './KimpItem';
 

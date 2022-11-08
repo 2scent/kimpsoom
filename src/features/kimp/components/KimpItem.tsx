@@ -5,7 +5,7 @@ import StyledTableCell from '@/shared/components/StyledTableCell';
 
 import useExchangeRate from '@/shared/hooks/use-exchange-rate';
 
-import calculateKimp from '../utils/calculate-kimp.ts';
+import calculateKimp from '../utils/calculate-kimp';
 
 interface KimpItemProps {
   coin: {
