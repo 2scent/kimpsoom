@@ -6,7 +6,7 @@ import fetchUpbitTickers from '../api/fetch-upbit-tickers';
 
 export default function useUpbitTickers(): UseQueryResult<string[], AxiosError> {
   return useQuery(
-    ['upbit', 'tickers', 'krw'],
+    ['upbit', 'tickers'],
     fetchUpbitTickers,
   );
 }
