@@ -24,7 +24,7 @@ const { reducer, actions } = createSlice({
     initCoins(state, { payload: { tickers } }) {
       return {
         ...state,
-        coins: tickers.map((ticker: Ticker) => ({
+        coins: tickers.map((ticker: string) => ({
           ticker,
           koreanPrice: null,
           foreignPrice: null,
