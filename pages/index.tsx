@@ -5,7 +5,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 import fetchExchangeRate from '@/shared/api/fetch-exchange-rate';
 
 import { ExchangeRateContainer } from '@/features/exchange-rate';
-import { KimpContainer, UpbitTickersContainer } from '@/features/kimp';
+import { fetchUpbitTickers, KimpContainer, UpbitTickersContainer } from '@/features/kimp';
 
 export default function HomePage() {
   return (
@@ -21,7 +21,10 @@ export default function HomePage() {
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['exchangeRate'], fetchExchangeRate);
+  await Promise.all([
+    queryClient.prefetchQuery(['exchangeRate'], fetchExchangeRate),
+    queryClient.prefetchQuery(['upbit', 'tickers'], fetchUpbitTickers),
+  ]);
 
   return {
     props: {
