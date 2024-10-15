@@ -5,8 +5,6 @@
 
 ## 데모
 
-- [https://kimpsoom.vercel.app](https://kimpsoom.vercel.app/)
-
 ![demo](https://user-images.githubusercontent.com/52326913/200296692-85583aeb-e544-43ed-b91a-577ae69d4d9d.gif)
 
 ## 주요 기능
