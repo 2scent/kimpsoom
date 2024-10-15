@@ -10,12 +10,12 @@ export default function useConnectBybit(tickers: string[]) {
   const dispatch = useDispatch();
   const throttle = useThrottle(500);
 
-  const { sendMessage } = useWebSocket('wss://stream.bybit.com/realtime_public', {
+  const { sendMessage } = useWebSocket('wss://stream.bybit.com/v5/public/spot', {
     onOpen: () => {
       tickers.forEach((code) => {
         const message = {
           op: 'subscribe',
-          args: [`trade.${code}USDT`],
+          args: [`publicTrade.${code}USDT`],
         };
 
         sendMessage(JSON.stringify(message));
@@ -26,15 +26,15 @@ export default function useConnectBybit(tickers: string[]) {
 
       if (!data?.length) return;
 
-      const { symbol, price } = data[data.length - 1];
-      const ticker = symbol.substring(0, symbol.length - 4);
+      const { s, p } = data[data.length - 1];
+      const ticker = s.substring(0, s.length - 4);
 
       throttle(
         ticker,
         () => dispatch(
           changeForeignPrice({
-            ticker: symbol.substring(0, symbol.length - 4),
-            foreignPrice: price,
+            ticker: s.substring(0, s.length - 4),
+            foreignPrice: p,
           }),
         ),
       );
